@@ -1,5 +1,6 @@
 import java.util.Map;
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -72,11 +73,11 @@ public class DataStructuresAlgorithms {
 	 * 	O(log n) time: eliminate 1/2 of elements in each iteration 
 	 * 	O(1) space (constant space): no elements stored
 	 * 
-	 * @param numbers	array of numbers
-	 * @param target	target number
-	 * @param left		left pointer index
-	 * @param right	 	right pointer index
-	 * 
+	 * @param  numbers	array of numbers
+	 * @param  target	target number
+	 * @param  left		left pointer index
+	 * @param  right	right pointer index
+	 * @return index of the target number or -1
 	 */
 	public int binarySearch(int[] numbers, int target, int left, int right) {
 		if (left > right) {
@@ -107,14 +108,21 @@ public class DataStructuresAlgorithms {
 	 * 	3. Move numbers > pivot to the right of the pivot.
 	 *  4. Swap number at pivot with the number at the right pointer 
 	 *     so that pivot will be in it's sorted position.
-	 * 	5. Continue on subarrays to the left/right of the newly positioned pivot.
+	 * 	5. Continue on sub-arrays to the left/right of the newly positioned pivot.
 	 * 
 	 * Time Complexity:
-	 * 	Worst case: O(n^2) time: if pivot splits array in lopsided manner (most of numbers are to the left or right of the pivot).
-	 *	Best case: if pivot evenly splits the array (approx equal numbers on each side),
-	 *	then we make log n calls of quicksort. Performing O (log n) operations n times => O(n log n) 
+	 * 	Worst case: O(n^2) time: if pivot splits array in lop-sided manner (most of numbers are to the left or right of the pivot).
+	 *	Best case: if pivot evenly splits the array (approximately equal numbers on each side),
+	 *	then we make log n calls of quick sort. Performing O (log n) operations n times => O(n log n) 
 	 *	Average case: O (n log n)
+	 *
+	 * Space Complexity:
+	 * 	O(log n): run quick sort recursively on smaller sub-array first.
 	 *	
+	 * @param  numbers 	 array of numbers
+	 * @param  startIdx  starting index 
+	 * @param  endIdx    ending index
+	 * @return void 	
 	 */
 	public void quickSort(int[] numbers, int startIdx, int endIdx) {
 		if (startIdx >= endIdx) {
@@ -163,6 +171,69 @@ public class DataStructuresAlgorithms {
 		numbers[i] = numbers[j];
 		numbers[j] = swapTemp;
 	}
+	/**
+	 * Merge Sort
+	 * 
+	 * Divide and conquer algorithm
+	 * 
+	 * Key Idea:
+	 * 	Divide the array in half recursively until we get to 1 element arrays 
+	 * 	and merge them into sorted sub-arrays until the entire array is sorted.
+	 * 
+	 * Time Complexity:
+	 * 	O(n log n) time: Each level takes O(n) time and we have O (log n) levels
+	 * 	because we continuously divide the arrays in half.
+	 * 
+	 * Space Complexity:
+	 * 	O(n log n) space
+	 * @param 	numbers 	array of numbers 
+	 * @return 	sorted array
+	 *  
+	 */
+	public int[] mergeSort(int[] numbers) {
+		if (numbers.length == 1) {
+			return numbers;
+		}
+		int middleIdx = numbers.length / 2;
+		int[] leftHalf = Arrays.copyOfRange(numbers, 0, middleIdx);
+		int[] rightHalf = Arrays.copyOfRange(numbers, middleIdx, numbers.length); 
+		return mergeSortedArrays(mergeSort(leftHalf), mergeSort(rightHalf));
+	}
+	/**
+	 * Merge Sorted Array 
+	 * 
+	 * @param  leftHalf 	left half of array
+	 * @param  rightHalf	right half of array
+	 * @return sorted array 
+	 */
+	public int[] mergeSortedArrays(int[] leftHalf, int[] rightHalf) {
+		int[] sortedArray = new int[leftHalf.length + rightHalf.length];
+		int i, j, k;
+		i = j = k = 0;
+		while (i < leftHalf.length && j < rightHalf.length) {
+			if (leftHalf[i] < rightHalf[j]) {
+				sortedArray[k] = leftHalf[i];
+				i++; 
+			}
+			else {
+				sortedArray[k] = rightHalf[j];
+				j++;
+			}
+			k++;
+		}
+		while(i < leftHalf.length) {
+			sortedArray[k] = leftHalf[i];
+			i++;
+			k++;
+		}
+		while(j < rightHalf.length) {
+			sortedArray[k] = rightHalf[j];
+			j++;
+			k++;
+		}
+		return sortedArray;
+	}
+	
 	
 	public void printNumbersArray(int[] array) {
 		for (int i = 0; i < array.length; i++) {
@@ -202,6 +273,14 @@ public class DataStructuresAlgorithms {
 		problemSet.quickSort(numbers, 0, numbers.length - 1);
 		System.out.print("Quick Sort. Sorted array is: ");
 		problemSet.printNumbersArray(numbers);
+		System.out.println();
+		/**
+		 * Merge Sort
+		 */
+		numbers = new int[] { 8, 5, 2, 9, 5, 6, 3 };
+		int [] sortedArray = problemSet.mergeSort(numbers);
+		System.out.print("Merge Sort. Sorted array is: ");
+		problemSet.printNumbersArray(sortedArray);
 	
 	}
 }
