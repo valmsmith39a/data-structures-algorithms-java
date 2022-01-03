@@ -274,6 +274,7 @@ public class DataStructuresAlgorithms {
 		System.out.print("Quick Sort. Sorted array is: ");
 		problemSet.printNumbersArray(numbers);
 		System.out.println();
+
 		/**
 		 * Merge Sort
 		 */
