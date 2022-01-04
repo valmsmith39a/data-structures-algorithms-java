@@ -109,7 +109,7 @@ public class Graph {
 		
 		// Test breadth first search, if there is a path
 		// from source to destination nodes
-//		boolean hasPathBFS = graph.hasPathBFS(3, 0); // false
+		// boolean hasPathBFS = graph.hasPathBFS(3, 0); // false
 		boolean hasPathBFS = graph.hasPathBFS(0, 5); // true 
 		System.out.println("has path BFS? " + hasPathBFS);
 	}
