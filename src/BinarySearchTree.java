@@ -80,11 +80,11 @@ public class BinarySearchTree {
 			}
 			index++;
 		}
-		System.out.println("In Order: ");
+		System.out.println("In Order Traveral: ");
 		root.printInOrder();
-		System.out.println("Pre-order: "); 
+		System.out.println("Pre-order Traversal: "); 
 		root.printPreOrder();
-		System.out.println("Post-order: ");
+		System.out.println("Post-order Traversal: ");
 		root.printPostOrder();
 	}
 }
