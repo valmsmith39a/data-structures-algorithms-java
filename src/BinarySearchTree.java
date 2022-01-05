@@ -64,6 +64,20 @@ public class BinarySearchTree {
 			}
 			System.out.println(data);
 		}
+		
+		public void invertBinaryTree() {
+			// swap left and right nodes
+			Node leftNode = left;
+			left = right;
+			right = leftNode;
+			
+			if (left != null) {
+				left.invertBinaryTree();
+			}
+			if (right != null) {
+				right.invertBinaryTree();
+			}
+		}
 	}
 
 	public static void main(String args[]) {
@@ -86,5 +100,11 @@ public class BinarySearchTree {
 		root.printPreOrder();
 		System.out.println("Post-order Traversal: ");
 		root.printPostOrder();
+		System.out.println("Invert binary tree: ");
+		System.out.println("Original tree: ");
+		root.printInOrder();
+		root.invertBinaryTree();
+		System.out.println("Inverted binary tree: ");
+		root.printInOrder();
 	}
 }
