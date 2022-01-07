@@ -10,101 +10,112 @@
  * 
  */
 public class BinarySearchTree {
+	public Node root;
+	
+	BinarySearchTree() {
+		this.root = null;
+	}
 
-	public static class Node {
-		Node left, right;
+	public class Node {
 		int data;
+		Node left, right;
 		
 		public Node(int data) {
 			this.data = data;
+			this.left = null;
+			this.right = null;
 		}
+	}
+	
+	public void insert(int data) {
+		this.root = insert(this.root, data);
+	}
 		
-		public void insert(int value) {
-			if (value < data) {
-				if (left == null) {
-					left = new Node(value);
-				} else {
-					left.insert(value);
-				}
-			} else {
-				if (right == null) {
-					right = new Node(value);
-				} else {
-					right.insert(value);
-				}
-			}
+	public Node insert(Node node, int data) {
+		if(node == null) {
+			return new Node(data);
 		}
-		
-		public void printInOrder() {
-			if (left != null) {
-				left.printInOrder();
-			}
-			System.out.println(data);
-			if (right != null) {
-				right.printInOrder();
-			}
+		if (data < node.data) {
+			node.left = insert(node.left, data);
+		} else if (data > node.data){
+			node.right = insert(node.right, data);
 		}
+		return node;
+	}
 		
-		public void printPreOrder() {
-			System.out.println(data);
-			if (left != null) {
-				left.printPreOrder();
-			}
-			if (right != null) {
-				right.printPreOrder();
-			}
+	public void printInOrder(Node node) {
+		if (node != null) {
+			printInOrder(node.left);
+			System.out.println(node.data);
+			printInOrder(node.right);
 		}
+	}
 		
-		public void printPostOrder() {
-			if (left != null) {
-				left.printPostOrder();
-			}
-			if (right != null) {
-				right.printPostOrder();
-			}
-			System.out.println(data);
+	public void printPreOrder(Node node) {
+		if (node != null) {
+			System.out.println(node.data);
+			printPreOrder(node.left);
+			printPreOrder(node.right);
 		}
+	}
 		
-		public void invertBinaryTree() {
+	public void printPostOrder(Node node) {
+		if (node != null) {
+			printPostOrder(node.left);
+			printPostOrder(node.right);
+			System.out.println(node.data);
+		}
+	}
+		
+	public void invertBinaryTree(Node node) {
+		if (node != null) {
 			// swap left and right nodes
-			Node leftNode = left;
-			left = right;
-			right = leftNode;
+			Node leftNode = node.left;
+			node.left = node.right;
+			node.right = leftNode;
 			
-			if (left != null) {
-				left.invertBinaryTree();
-			}
-			if (right != null) {
-				right.invertBinaryTree();
-			}
+			invertBinaryTree(node.left);
+			invertBinaryTree(node.right);
 		}
 	}
 
+
 	public static void main(String args[]) {
 		int[] values = new int[]{ 5, 3, 7, 6, 2, 9, 1, 4, 8, 10 };
-		int index = 0;
-		Node root = new Node(values[0]);
+		BinarySearchTree bst = new BinarySearchTree();
 		
 		for (int value : values) {
-			if (index == 0) {
-				index++;
-				continue;
-			} else {
-				root.insert(value);
-			}
-			index++;
+			bst.insert(value);
 		}
 		System.out.println("In Order Traveral: ");
-		root.printInOrder();
+		bst.printInOrder(bst.root);
 		System.out.println("Pre-order Traversal: "); 
-		root.printPreOrder();
+		bst.printPreOrder(bst.root);
 		System.out.println("Post-order Traversal: ");
-		root.printPostOrder();
+		bst.printPostOrder(bst.root);
 		System.out.println("Invert binary tree: ");
 		System.out.println("Original tree: ");
-		root.printInOrder();
-		root.invertBinaryTree();
+		bst.printInOrder(bst.root);
+		bst.invertBinaryTree(bst.root);
 		System.out.println("Inverted binary tree: ");
-		root.printInOrder();
+		bst.printInOrder(bst.root);
+		
+		int[] values2 = new int[] { 7, 4, 12, 2, 6, 3, 5, 9, 8, 11, 19, 15, 20 };
+		BinarySearchTree bst2 = new BinarySearchTree();
+		for (int value : values2) {
+			bst2.insert(value);
+		}
+		System.out.println("In Order Traveral: ");
+		bst2.printInOrder(bst2.root);
+		System.out.println("Pre-order Traversal: "); 
+		bst2.printPreOrder(bst2.root);
+		System.out.println("Post-order Traversal: ");
+		bst2.printPostOrder(bst2.root);
+		System.out.println("Invert binary tree: ");
+		System.out.println("Original tree: ");
+		bst2.printInOrder(bst2.root);
+		bst2.invertBinaryTree(bst2.root);
+		System.out.println("Inverted binary tree: ");
+		bst2.printInOrder(bst2.root);
 	}
 }
