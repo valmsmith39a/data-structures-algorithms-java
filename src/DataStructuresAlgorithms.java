@@ -41,14 +41,13 @@ public class DataStructuresAlgorithms {
 	 *  
 	 */
 	public int[] twoNumberSum(int[] numbers, int targetSum) {
-		Map<Integer, Integer> numbersHashMap = new HashMap<>();
-		for (int i = 0; i < numbers.length; i++) {
-			int potentialMatch = targetSum - numbers[i];
+		HashMap<Integer, Boolean> numbersHashMap = new HashMap<>();
+		for (int number : numbers) {
+			int potentialMatch = targetSum - number;
 			if (numbersHashMap.containsKey(potentialMatch)) {
-				int potentialMatchIndex = numbersHashMap.get(potentialMatch);
-				return new int[] { numbers[potentialMatchIndex], numbers[i] };	
+				return new int[] { potentialMatch, number };
 			}
-			numbersHashMap.put(numbers[i], i);
+			numbersHashMap.put(number, true);
 		}
 		return null;
 	}
@@ -63,8 +62,12 @@ public class DataStructuresAlgorithms {
 	 * 
 	 * 	2. A string has balanced brackets only if the stack is empty after
 	 * 	iterating through the entire string.
+	 * 
+	 * Time/Space Complexity:
+	 * O(n) time: iterate through characters in expression
+	 * O(n) space: store brackets in the expression
 	 */
-	public static boolean isBalancedBrackets(String expression) {
+	public boolean isBalancedBrackets(String expression) {
 		Stack<Character> stack = new Stack<>();
 		String openBrackets = "([{";
 		String closedBrackets = ")]}";
@@ -95,9 +98,10 @@ public class DataStructuresAlgorithms {
 	 * Binary Search
 	 * 
 	 * Problem: Return index of target element or -1
-	 * 
-	 * Key idea: Search for element by repeatedly dividing array in half and see if 
-	 * element is in right or left half.
+	 *  
+	 * Key idea: Search for target by recursively dividing the array in 
+	 * half and look for the target in either the left or right half. Each
+	 * iteration reduces the search space by 1/2.
 	 * 
 	 * Steps:
 	 * 	1. Left/Right pointers at beginning/end of array
@@ -124,13 +128,13 @@ public class DataStructuresAlgorithms {
 		}
 		int pivot = (left + right) / 2; // Java rounds down by default
 		int potentialMatch = numbers[pivot];
-		if (target == potentialMatch) {
+		if (potentialMatch == target) {
 			return pivot;
 		}
-		if (target < potentialMatch) {
-			return binarySearch(numbers, target, left, pivot - 1);
+		if (potentialMatch < target) {
+			return binarySearch(numbers, target, pivot + 1, right);	
 		}
-		return binarySearch(numbers, target, pivot + 1, right);	
+		return binarySearch(numbers, target, left, pivot - 1);
 	}
 	
 	/**
@@ -175,10 +179,10 @@ public class DataStructuresAlgorithms {
 				swap(numbers, leftIdx, rightIdx);
 			}
 			if (numbers[leftIdx] <= numbers[pivotIdx]) {
-				leftIdx += 1;
+				leftIdx++;
 			}
 			if (numbers[rightIdx] >= numbers[pivotIdx]) {
-				rightIdx -= 1;
+				rightIdx--;
 			}
 		}
 		// rightIdx and leftIdx have crossed
@@ -298,6 +302,15 @@ public class DataStructuresAlgorithms {
 		System.out.println("Two Number Sum. Target sum is: " + targetSum + " solution is: " + resultTwoNumberSum[0] + ", " + resultTwoNumberSum[1]);
 		
 		/**
+		 * Balanced Brackets
+		 */
+		String expression = "{{[[((a, b))],[]]}}"; // true
+		// String expression = "{{[}}]]"; // false 
+		System.out.println("Balanced Brackets. Expression is: " 
+				+ expression
+				+ " Is balanced brackets? " + problemSet.isBalancedBrackets(expression));
+		
+		/**
 		 * Binary Search
 		 */
 		numbers = new int[] { 2, 5, 6, 9, 15, 19, 23 };
@@ -321,15 +334,6 @@ public class DataStructuresAlgorithms {
 		int [] sortedArray = problemSet.mergeSort(numbers);
 		System.out.print("Merge Sort. Sorted array is: ");
 		problemSet.printNumbersArray(sortedArray);
-		System.out.println();
-		
-		/**
-		 * Balanced Brackets
-		 */
-		String expression = "{{[[((a, b))],[]]}}"; // true
-		// String expression = "{{[}}]]"; // false 
-		System.out.println("Balanced Brackets. Expression is: " 
-				+ expression
-				+ " Is balanced brackets? " + isBalancedBrackets(expression));
+		System.out.println();		
 	}
 }

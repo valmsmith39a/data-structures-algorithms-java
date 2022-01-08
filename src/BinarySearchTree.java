@@ -100,6 +100,7 @@ public class BinarySearchTree {
 		System.out.println("Inverted binary tree: ");
 		bst.printInOrder(bst.root);
 		
+		// https://www.cs.rochester.edu/u/gildea/csc282/slides/C12-bst.pdf
 		int[] values2 = new int[] { 7, 4, 12, 2, 6, 3, 5, 9, 8, 11, 19, 15, 20 };
 		BinarySearchTree bst2 = new BinarySearchTree();
 		for (int value : values2) {
