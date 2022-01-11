@@ -5,17 +5,17 @@ import java.util.LinkedList;
 
 public class Graph {
 	// node lookup hash table
-	private HashMap<Integer, Node> nodeLookup = new HashMap<Integer, Node>();
+	public HashMap<Integer, Node> nodeLookup = new HashMap<>();
 
-	public static class Node {
-		private int id;
-		LinkedList<Node> adjacent = new LinkedList<Node>();
-		private Node (int id) {
+	public class Node {
+		int id;
+		LinkedList<Node> adjacent = new LinkedList<>();
+		public Node (int id) {
 			this.id = id;
 		}
 	}
 	
-	private Node getNode(int id) {
+	public Node getNode(int id) {
 		return nodeLookup.get(id); 
 	}
 	
