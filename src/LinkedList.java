@@ -1,6 +1,6 @@
 public class LinkedList {
-	Node head;
-	
+	private Node head;
+		
 	public class Node {
 		Node next;
 		int data;
@@ -74,6 +74,8 @@ public class LinkedList {
 		Node currentNode = head;
 		Node previousNode = null;
 		
+		// Must operation on final node
+		// Cannot break out of loop before then
 		while (currentNode != null) {
 			Node nextNode = currentNode.next;
 			currentNode.next = previousNode;
