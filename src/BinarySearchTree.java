@@ -10,7 +10,7 @@
  * 
  */
 public class BinarySearchTree {
-	public Node root;
+	Node root;
 	
 	BinarySearchTree() {
 		this.root = null;
@@ -66,7 +66,8 @@ public class BinarySearchTree {
 			System.out.println(node.data);
 		}
 	}
-		
+	
+	// For every node, swap left and right child nodes
 	public void invertBinaryTree(Node node) {
 		if (node != null) {
 			// swap left and right nodes
@@ -87,6 +88,7 @@ public class BinarySearchTree {
 		for (int value : values) {
 			bst.insert(value);
 		}
+		System.out.println("values 1: ");
 		System.out.println("In Order Traveral: ");
 		bst.printInOrder(bst.root);
 		System.out.println("Pre-order Traversal: "); 
@@ -106,6 +108,7 @@ public class BinarySearchTree {
 		for (int value : values2) {
 			bst2.insert(value);
 		}
+		System.out.println("------------- values 2: ---------------");
 		System.out.println("In Order Traveral: ");
 		bst2.printInOrder(bst2.root);
 		System.out.println("Pre-order Traversal: "); 

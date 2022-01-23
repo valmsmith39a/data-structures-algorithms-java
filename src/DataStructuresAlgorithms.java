@@ -45,11 +45,11 @@ public class DataStructuresAlgorithms {
 		for (int number : numbers) {
 			int potentialMatch = targetSum - number;
 			if (numbersHashMap.containsKey(potentialMatch)) {
-				return new int[] { potentialMatch, number };
+				return new int[]{ potentialMatch, number };
 			}
 			numbersHashMap.put(number, true);
 		}
-		return null;
+		return new int[]{};
 	}
 	
 	/**
@@ -299,6 +299,7 @@ public class DataStructuresAlgorithms {
 		numbers = new int[] { 1, 5, 8, 2, 4, 9, 12 };
 		int targetSum = 21;
 		int[] resultTwoNumberSum = problemSet.twoNumberSum(numbers, targetSum);
+		System.out.println(resultTwoNumberSum);
 		System.out.println("Two Number Sum. Target sum is: " + targetSum + " solution is: " + resultTwoNumberSum[0] + ", " + resultTwoNumberSum[1]);
 		
 		/**

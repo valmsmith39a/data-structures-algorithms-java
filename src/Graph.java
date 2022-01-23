@@ -37,13 +37,13 @@ public class Graph {
 	}
 	
 	public boolean hasPathDFS(Node source, Node destination, HashSet<Integer> visited) {
+		if (source == destination) {
+			return true;
+		}
 		if(visited.contains(source.id)) {
 			return false;
 		}
 		visited.add(source.id);
-		if (source == destination) {
-			return true;
-		}
 		for (Node child : source.adjacent) {
 			if (hasPathDFS(child, destination, visited)) {
 				return true;
@@ -103,13 +103,13 @@ public class Graph {
 		// output: [Graph$Node@53e25b76, Graph$Node@73a8dfcc]
 		
 		// Test depth first search, has path
-		// boolean hasPathDFS = graph.hasPathDFS(3, 0); // false
+//		boolean hasPathDFS = graph.hasPathDFS(3, 0); // false
 		boolean hasPathDFS = graph.hasPathDFS(0, 5); // true
 		System.out.println("has path DFS? " + hasPathDFS);
 		
 		// Test breadth first search, if there is a path
 		// from source to destination nodes
-		// boolean hasPathBFS = graph.hasPathBFS(3, 0); // false
+//		boolean hasPathBFS = graph.hasPathBFS(3, 0); // false
 		boolean hasPathBFS = graph.hasPathBFS(0, 5); // true 
 		System.out.println("has path BFS? " + hasPathBFS);
 	}

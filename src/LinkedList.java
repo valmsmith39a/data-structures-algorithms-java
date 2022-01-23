@@ -72,12 +72,13 @@ public class LinkedList {
 	
 	public void reverseLinkedList() {		
 		Node currentNode = head;
-		Node previousNode = null;
+		Node previousNode, nextNode;
+		previousNode = nextNode = null;
 		
 		// Must operation on final node
 		// Cannot break out of loop before then
 		while (currentNode != null) {
-			Node nextNode = currentNode.next;
+			nextNode = currentNode.next;
 			currentNode.next = previousNode;
 			previousNode = currentNode;
 			currentNode = nextNode;
@@ -94,11 +95,18 @@ public class LinkedList {
 			linkedList.append(value);
 		}
 		
+		System.out.println("old head value" + linkedList.head.data);
+		// Prepend
+		linkedList.prepend(0);
+		
+		System.out.println("new head value" + linkedList.head.data);
+		
 		// Reverse a linked list 
 		System.out.println("Linked list original order: ");
 		linkedList.printLinkedList();
 		linkedList.reverseLinkedList();
 		System.out.println("Reversed linked list: ");
 		linkedList.printLinkedList();
+		
 	}
 }
