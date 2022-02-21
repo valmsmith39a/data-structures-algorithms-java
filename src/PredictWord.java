@@ -9,7 +9,7 @@ public class PredictWord {
 	public ArrayList<String> searchWords(String userInput, String[] potentialMatches) {
 		Stack<Character> userInputStack = new Stack<>();
 		String foundWord = ""; 
-		ArrayList<String> wordMatches = new ArrayList();
+		ArrayList<String> wordMatches = new ArrayList<String>();
 
 		for (String word : potentialMatches) {
 			for (int i = userInput.length() - 1; i >= 0; i--) {
