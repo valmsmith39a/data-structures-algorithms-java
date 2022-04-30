@@ -10,37 +10,40 @@ public class Graph {
 	public class Node {
 		int id;
 		LinkedList<Node> adjacent = new LinkedList<>();
-		public Node (int id) {
+
+		public Node(int id) {
 			this.id = id;
 		}
 	}
-	
+
 	public Node getNode(int id) {
-		return nodeLookup.get(id); 
+		return nodeLookup.get(id);
 	}
-	
+
 	public void addNode(int id) {
 		nodeLookup.put(id, new Node(id));
 	}
-	
+
 	public void addEdge(int source, int destination) {
 		Node s = getNode(source);
 		Node d = getNode(destination);
 		s.adjacent.add(d);
 	}
-	
+
 	public boolean hasPathDFS(int source, int destination) {
 		Node s = getNode(source);
 		Node d = getNode(destination);
 		HashSet<Integer> visited = new HashSet<Integer>();
 		return hasPathDFS(s, d, visited);
 	}
-	
+
 	public boolean hasPathDFS(Node source, Node destination, HashSet<Integer> visited) {
+		// Compares the reference (memory location) of source and destination Node
+		// objects
 		if (source == destination) {
 			return true;
 		}
-		if(visited.contains(source.id)) {
+		if (visited.contains(source.id)) {
 			return false;
 		}
 		visited.add(source.id);
@@ -51,13 +54,13 @@ public class Graph {
 		}
 		return false;
 	}
-	
+
 	public boolean hasPathBFS(int source, int destination) {
 		Node s = getNode(source);
 		Node d = getNode(destination);
 		return hasPathBFS(s, d);
 	}
-	
+
 	public boolean hasPathBFS(Node source, Node destination) {
 		LinkedList<Node> nextToVisit = new LinkedList<Node>();
 		HashSet<Integer> visited = new HashSet<Integer>();
@@ -67,19 +70,19 @@ public class Graph {
 			if (node == destination) {
 				return true;
 			}
-			
-			if (visited.contains(node.id) ) {
+
+			if (visited.contains(node.id)) {
 				continue;
 			}
 			visited.add(node.id);
-			
-			for (Node child: node.adjacent) {
+
+			for (Node child : node.adjacent) {
 				nextToVisit.add(child);
 			}
 		}
 		return false;
 	}
-	
+
 	public static void main(String[] args) {
 		Graph graph = new Graph();
 		graph.addNode(0);
@@ -88,29 +91,29 @@ public class Graph {
 		graph.addNode(3);
 		graph.addNode(4);
 		graph.addNode(5);
-		
+
 		graph.addEdge(0, 1);
 		graph.addEdge(0, 2);
 		graph.addEdge(1, 3);
 		graph.addEdge(1, 4);
 		graph.addEdge(3, 5);
-		
-		// Example of how to access a child node 
+
+		// Example of how to access a child node
 		// System.out.println("node " + graph.getNode(0).adjacent.get(0).id);
-		// output: node 1 
-		// Example of how to access adjacent list (child nodes) 
+		// output: node 1
+		// Example of how to access adjacent list (child nodes)
 		// System.out.println("node " + graph.getNode(0).adjacent);
 		// output: [Graph$Node@53e25b76, Graph$Node@73a8dfcc]
-		
+
 		// Test depth first search, has path
-//		boolean hasPathDFS = graph.hasPathDFS(3, 0); // false
+		// boolean hasPathDFS = graph.hasPathDFS(3, 0); // false
 		boolean hasPathDFS = graph.hasPathDFS(0, 5); // true
 		System.out.println("has path DFS? " + hasPathDFS);
-		
+
 		// Test breadth first search, if there is a path
 		// from source to destination nodes
-//		boolean hasPathBFS = graph.hasPathBFS(3, 0); // false
-		boolean hasPathBFS = graph.hasPathBFS(0, 5); // true 
+		// boolean hasPathBFS = graph.hasPathBFS(3, 0); // false
+		boolean hasPathBFS = graph.hasPathBFS(0, 5); // true
 		System.out.println("has path BFS? " + hasPathBFS);
 	}
 }
