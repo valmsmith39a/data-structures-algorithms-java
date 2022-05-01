@@ -32,7 +32,7 @@ public class BinarySearchTree {
 	}
 		
 	public Node insert(Node node, int data) {
-		if(node == null) {
+		if (node == null) {
 			return new Node(data);
 		}
 		if (data < node.data) {
@@ -68,6 +68,7 @@ public class BinarySearchTree {
 	}
 	
 	// For every node, swap left and right child nodes
+	// https://www.educative.io/edpresso/how-to-invert-a-binary-tree
 	public void invertBinaryTree(Node node) {
 		if (node != null) {
 			// swap left and right nodes
@@ -89,10 +90,13 @@ public class BinarySearchTree {
 			bst.insert(value);
 		}
 		System.out.println("values 1: ");
+		// 1. 2. 3, 4, 5, 6, 7, 8, 9, 10
 		System.out.println("In Order Traveral: ");
 		bst.printInOrder(bst.root);
+		// 5, 3, 2, 1, 4, 7, 6, 9, 8, 10
 		System.out.println("Pre-order Traversal: "); 
 		bst.printPreOrder(bst.root);
+		// 1, 2, 4, 3, 6, 8, 10, 9, 7, 5
 		System.out.println("Post-order Traversal: ");
 		bst.printPostOrder(bst.root);
 		System.out.println("Invert binary tree: ");
