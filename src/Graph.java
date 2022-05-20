@@ -4,15 +4,16 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Graph {
-	// node lookup hash table
+	// Node lookup hash table
 	public HashMap<Integer, Node> nodeLookup = new HashMap<>();
 
 	public class Node {
 		int id;
-		LinkedList<Node> adjacent = new LinkedList<>();
+		LinkedList<Node> adjacent;
 
 		public Node(int id) {
 			this.id = id;
+			adjacent = new LinkedList<>();
 		}
 	}
 
@@ -64,18 +65,18 @@ public class Graph {
 	public boolean hasPathBFS(Node source, Node destination) {
 		LinkedList<Node> nextToVisit = new LinkedList<Node>();
 		HashSet<Integer> visited = new HashSet<Integer>();
+		// Adds to the end ("tail") of the list
 		nextToVisit.add(source);
 		while (!nextToVisit.isEmpty()) {
+			// Removes from the beginning ("head") of the list
 			Node node = nextToVisit.remove();
 			if (node == destination) {
 				return true;
 			}
-
 			if (visited.contains(node.id)) {
 				continue;
 			}
 			visited.add(node.id);
-
 			for (Node child : node.adjacent) {
 				nextToVisit.add(child);
 			}
