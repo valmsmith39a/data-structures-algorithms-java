@@ -114,7 +114,8 @@ public class DataStructuresAlgorithms {
 	 * 
 	 * Time/Space Complexity:
 	 * O(log n) time: eliminate 1/2 of elements in each iteration
-	 * O(1) space (constant space): no elements stored
+	 * For iterative approach, O(1) space (constant space): no elements stored
+	 * For recursive approach, O(log n) space:
 	 * 
 	 * @param numbers array of numbers
 	 * @param target  target number
@@ -131,7 +132,7 @@ public class DataStructuresAlgorithms {
 		if (potentialMatch == target) {
 			return pivot;
 		}
-		if (potentialMatch < target) {
+		if (target > potentialMatch) {
 			return binarySearch(numbers, target, pivot + 1, right);
 		}
 		return binarySearch(numbers, target, left, pivot - 1);
