@@ -11,11 +11,15 @@ public class LRUCache {
 	}
 	
 	private void addNode(DLinkedNode node) {
-		node.prev = head;      // New node is the head 
-		node.next = head.next; // In doubly linked list head.next is the end node  
+		// Ex add node 2 
+		// head -> 1 -> tail
+		// head -> 2 -> 1 -> tail 
 		
-		head.next.prev = node; // Connect end node to current node
-		head.next = node;      // New node is next node
+		node.prev = head;       
+		node.next = head.next;   
+		
+		head.next.prev = node; 
+		head.next = node;      
 	}
 	
 	private void removeNode(DLinkedNode node) {
@@ -33,6 +37,11 @@ public class LRUCache {
 	}
 	
 	private DLinkedNode popTail() {
+		// Ex pop tail  
+		// head -> 3 -> 2 -> 1 -> tail
+		// node 1 is least recently used. tail.prev would get that value. 
+		// After the pop: 
+		// head -> 3 -> 2 -> tail 
 		DLinkedNode res = tail.prev;
 		removeNode(res);
 		return res;
