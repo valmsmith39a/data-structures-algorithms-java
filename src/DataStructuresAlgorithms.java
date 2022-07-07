@@ -1,8 +1,10 @@
 import java.util.Map;
 import java.util.Stack;
+import java.util.List;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.*;
 
 /**
  * Data structures and algorithms problem set
@@ -310,6 +312,34 @@ public class DataStructuresAlgorithms {
 				System.out.print(", ");
 			}
 		}
+	}
+	/**
+	 * Permutations
+	 * 
+	 * @param args
+	 */
+	public List<List<Integer>> getPermutations(List<Integer> array) {
+		List<List<Integer>> permutations = new ArrayList<List<Integer>>();
+		getPermutations(0, array, permutations);
+		return permutations;
+	}
+	
+	public void getPermutations(int i, List<Integer> array, List<List<Integer>> permutations) {
+		if (i == array.size() - 1) {
+			permutations.add(new ArrayList<Integer>(array));
+		} else {
+			for (int j = i; j < array.size(); j++) {
+				swap(array, i, j); 
+				getPermutations(i + 1, array, permutations);
+				swap(array, i, j);
+			}
+		}
+	}
+	
+	public void swap(List<Integer> array, int i, int j) {
+		Integer temp = array.get(i);
+		array.set(i, array.get(j));
+		array.set(j, temp);
 	}
 
 	public static void main(String[] args) {
