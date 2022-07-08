@@ -305,14 +305,7 @@ public class DataStructuresAlgorithms {
 		return sortedArray;
 	}
 
-	public void printNumbersArray(int[] array) {
-		for (int i = 0; i < array.length; i++) {
-			System.out.print(array[i]);
-			if (i < array.length - 1) {
-				System.out.print(", ");
-			}
-		}
-	}
+	
 	/**
 	 * Permutations
 	 * 
@@ -342,6 +335,21 @@ public class DataStructuresAlgorithms {
 		array.set(j, temp);
 	}
 
+	public void printNumbersArray(int[] array) {
+		for (int i = 0; i < array.length; i++) {
+			System.out.print(array[i]);
+			if (i < array.length - 1) {
+				System.out.print(", ");
+			}
+		}
+	}
+
+	public void printList(List<List<Integer>> elements) {
+		for (List<Integer> el : elements) {
+			System.out.println(el.toString());
+		}
+	}
+	
 	public static void main(String[] args) {
 		System.out.println("Hello Metaverse");
 
@@ -392,5 +400,13 @@ public class DataStructuresAlgorithms {
 		System.out.print("Merge Sort. Sorted array is: ");
 		problemSet.printNumbersArray(sortedArray);
 		System.out.println();
+		
+		/**
+		 * Permutations
+		 */
+		List<Integer> numberSet = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
+		List<List<Integer>> permutations = problemSet.getPermutations(numberSet);
+		System.out.print("Permutations of " + numberSet.toString() + ": \n");
+		problemSet.printList(permutations);
 	}
 }
