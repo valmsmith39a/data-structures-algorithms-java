@@ -56,4 +56,19 @@ public class Logger {
         }
         return false;
     }
+
+    public static void main (String[] args) {
+       Object[][] array = new Object[][]{{ 1, "foo"}, { 2, "bar"}, { 3, "foo"}, { 8, "bar"}, { 10, "foo"}, { 11, "foo"}};
+       Logger logger = new Logger();
+       boolean shouldPrintMessage = false;
+       for (int i = 0; i < array.length; i++) {
+           shouldPrintMessage = logger.shouldPrintMessage((int) array[i][0], (String) array[i][1]);
+           if (shouldPrintMessage) {
+               System.out.println(shouldPrintMessage);
+           } else {
+               System.out.println(shouldPrintMessage);
+           }
+       }
+   }
 }
+
