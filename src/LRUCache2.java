@@ -177,7 +177,33 @@ class LRUCache2 {
     }
     
     public static void main(String args[]) {
+        LRUCache2 lruCache = new LRUCache2(3);
+        System.out.println("LRUCache. Key-value pairs inserted: {\"a\": 1}, {\"b\", 2}, {\"c\", 3}max size is 3");
+        lruCache.insertKeyValuePair("a", 1);       
+        lruCache.insertKeyValuePair("b", 2);
+        lruCache.insertKeyValuePair("c", 3); 
         
+        // Get most recent key
+        String mostRecentKey = lruCache.getMostRecentKey();
+        // Expected: c
+        System.out.println("Most recent key is: " + mostRecentKey);
+        
+        // Get value from key 
+        LRUResult result = lruCache.getValueFromKey("c");
+        // Expected: 3
+        System.out.println("Get value from key \"c\": " + result.value);
+        
+        // Insert key-value pair beyond capacity of 3 
+        System.out.println("insert key-value pair beyond capacity, {\"d\", 4}"); 
+        lruCache.insertKeyValuePair("d", 4);
+        mostRecentKey = lruCache.getMostRecentKey();
+        // Expected: d
+        System.out.println("Most recent key is: " + mostRecentKey);
+
+        // Demonstrate successful eviction of least recently used key-value pair in cache 
+        LRUResult result2 = lruCache.getValueFromKey("a");
+        // Expected: null 
+        System.out.println("{a:1} should have been evicted. Try to get value from key a " + result2.value);
     }
 }
 
