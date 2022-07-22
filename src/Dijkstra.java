@@ -33,6 +33,8 @@ public class Dijkstra {
 	 * the minimum distance
 	 * between the vertex and the start vertex.
 	 * 
+	 * 
+	 * 
 	 * Steps:
 	 * 1. Initialize all min distances from start to each vertex to infinity
 	 * 2. Traverse the graph while visited != number of vertices
