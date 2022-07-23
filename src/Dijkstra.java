@@ -27,11 +27,18 @@ public class Dijkstra {
 	 * 
 	 * Summary:
 	 * 1. From the start vertex, visit the next vertex which has not been visited
-	 * and has the shortest
-	 * distance from the start vertex.
-	 * 2. At each vertex, visit the adjacent vertices and for each vertex, update
-	 * the minimum distance
-	 * between the vertex and the start vertex.
+	 * and has the shortest distance from the start vertex.
+	 * 2. At each vertex, iterate through the adjacent vertices and for each vertex, update
+	 * the minimum distance between the vertex and the start vertex.
+	 * 
+	 * Summary version 2: 
+	 * 1. Problem: Given the start node, find the minimum distance between start node and every other node in the graph.
+	 * 2. Visit a node
+	 * 		a. For the first case, visit the starting node. Distance from starting node to starting node is 0.
+	 *      b. For subsequent cases, choose the adjacent node that has the minimum distance from the starting node. 
+	 * 3. When visiting a node
+	 * 		a. Iterate through the adjacent nodes and compute the min distance from the start node to the adjacent node and update 
+	 *         the minDistances array to track the min distances from start node to every other node in the graph. 
 	 * 
 	 * 
 	 * 
