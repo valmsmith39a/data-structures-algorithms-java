@@ -46,6 +46,7 @@ public class NumberOfIslands {
             return;
         }
 
+        // Flip all adjacent 1s to 0s.
         grid[r][c] = '0';
         dfs(grid, r - 1, c);
         dfs(grid, r + 1, c);
@@ -62,11 +63,13 @@ public class NumberOfIslands {
         int nr = grid.length;
         int nc = grid[0].length;
         int numOfIslands = 0;
-        for (int r = 0; r < nr; ++r) {
-            for (int c = 0; c < nc; ++c) {
+
+        for (int r = 0; r < nr; r++) {
+            for (int c = 0; c < nc; c++) {
+                // Identify an island
                 if (grid[r][c] == '1') {
-                    ++numOfIslands;
                     dfs(grid, r, c);
+                    numOfIslands++;
                 }
             }
         }
