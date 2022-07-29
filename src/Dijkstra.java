@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Dijkstra {
 	/**
@@ -28,17 +29,23 @@ public class Dijkstra {
 	 * Summary:
 	 * 1. From the start vertex, visit the next vertex which has not been visited
 	 * and has the shortest distance from the start vertex.
-	 * 2. At each vertex, iterate through the adjacent vertices and for each vertex, update
+	 * 2. At each vertex, iterate through the adjacent vertices and for each vertex,
+	 * update
 	 * the minimum distance between the vertex and the start vertex.
 	 * 
-	 * Summary version 2: 
-	 * 1. Problem: Given the start node, find the minimum distance between start node and every other node in the graph.
+	 * Summary version 2:
+	 * 1. Problem: Given the start node, find the minimum distance between start
+	 * node and every other node in the graph.
 	 * 2. Visit a node
-	 * 		a. For the first case, visit the starting node. Distance from starting node to starting node is 0.
-	 *      b. For subsequent cases, choose the adjacent node that has the minimum distance from the starting node. 
+	 * a. For the first case, visit the starting node. Distance from starting node
+	 * to starting node is 0.
+	 * b. For subsequent cases, choose the adjacent node that has the minimum
+	 * distance from the starting node.
 	 * 3. When visiting a node
-	 * 		a. Iterate through the adjacent nodes and compute the min distance from the start node to the adjacent node and update 
-	 *         the minDistances array to track the min distances from start node to every other node in the graph. 
+	 * a. Iterate through the adjacent nodes and compute the min distance from the
+	 * start node to the adjacent node and update
+	 * the minDistances array to track the min distances from start node to every
+	 * other node in the graph.
 	 * 
 	 * 
 	 * 
@@ -77,7 +84,7 @@ public class Dijkstra {
 		// Distance from start vertex to start vertex is 0
 		minDistances[start] = 0;
 		// Track the visited vertices
-		HashSet<Integer> visited = new HashSet<>();
+		Set<Integer> visited = new HashSet<>();
 
 		/*
 		 * *
@@ -128,7 +135,7 @@ public class Dijkstra {
 
 	// Get the next vertex, which has not been visited, with the minimum distance to
 	// the starting vertex.
-	public int[] getVertexWithMinDistance(int[] minDistances, HashSet<Integer> visited) {
+	public int[] getVertexWithMinDistance(int[] minDistances, Set<Integer> visited) {
 		int currentMinDistance = Integer.MAX_VALUE;
 		int vertex = -1;
 
@@ -174,6 +181,7 @@ public class Dijkstra {
 		int startingVertex = 0;
 		Dijkstra dijkstra = new Dijkstra();
 		int[] minDistances = dijkstra.dijkstrasAlgorithm(startingVertex, adjacencyList);
+		// Solution: 0, 3, 2, 8
 		System.out.println("Dijkstra's Algorithm, min distances: ");
 		for (int distance : minDistances) {
 			System.out.println(distance);
