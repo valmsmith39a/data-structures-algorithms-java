@@ -94,9 +94,9 @@ public class Dijkstra {
 		 * 2. Visit each outbound vertex and update the minDistances array
 		 */
 		while (visited.size() != numberOfVertices) {
-			int[] currentEdge = getVertexWithMinDistance(minDistances, visited);
-			int vertex = currentEdge[0];
-			int currentMinDistance = currentEdge[1];
+			int[] currentVertexData = getVertexWithMinDistance(minDistances, visited);
+			int vertex = currentVertexData[0];
+			int currentMinDistance = currentVertexData[1];
 
 			// If currentMinDistance is infinity, tha vertex
 			// is not connected to the graph and all the
