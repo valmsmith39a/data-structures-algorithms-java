@@ -13,6 +13,10 @@ class TrappingRainWater {
      *  3. At each index, find the max amount of water able to be stored by 
      *     getting the min of the left/right max heights and subtract current heightear
      * 
+     * Time/Space Complexity: 
+     *  1. Runtime: O(n) time: 3 * O(n) => O(n): 3 for loops for left/right max and get water trapped at each index 
+     *  2. Space: O(n) space: 2 * O(n) => O(n): 2 arrays for left/right max
+     *
      * Other: 
      *  1. Dynamic Programming
      *  2. Memoization: store results of solutions to sub-problems.
