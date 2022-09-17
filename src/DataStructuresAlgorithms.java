@@ -127,12 +127,16 @@ public class DataStructuresAlgorithms {
 	 * @return index of the target number or -1
 	 */
 	public int binarySearch(int[] numbers, int target, int left, int right) {
+        // base case with a stop condition 
 		if (left > right) {
 			return -1;
 		}
-		int pivot = (left + right) / 2; // Java rounds down by default
+        // 1. Java rounds down by default 
+        // 2. Use this method for finding middle index to prevent Integer overflow 
+        //    if left, right or both are a large value (Integer.MAX_VALUE)
+		int pivot = left + (left + right) / 2;  
 		int potentialMatch = numbers[pivot];
-		if (potentialMatch == target) {
+		if (potentialMatch.equals(target)) {
 			return pivot;
 		}
 		if (target > potentialMatch) {

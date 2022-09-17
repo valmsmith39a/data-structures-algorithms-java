@@ -1,3 +1,4 @@
+import java.util.Map;
 import java.util.HashMap;
 
 /**
@@ -48,7 +49,7 @@ import java.util.HashMap;
  * 
  */
 public class Logger {
-    private HashMap<String, Integer> msgHashMap;
+    private Map<String, Integer> msgHashMap;
 
     public Logger() {
         msgHashMap = new HashMap<String, Integer>();
@@ -60,7 +61,7 @@ public class Logger {
             return true;
         }
 
-        Integer oldTimestamp = this.msgHashMap.get(message);
+        int oldTimestamp = this.msgHashMap.get(message);
         if (timestamp - oldTimestamp >= 10) {
             this.msgHashMap.put(message, timestamp);
             return true;
@@ -75,6 +76,7 @@ public class Logger {
         boolean shouldPrintMessage = false;
         for (int i = 0; i < array.length; i++) {
             shouldPrintMessage = logger.shouldPrintMessage((int) array[i][0], (String) array[i][1]);
+            // Solution: true, true, false, false, false, true
             if (shouldPrintMessage) {
                 System.out.println(shouldPrintMessage);
             } else {
