@@ -3,7 +3,7 @@ import java.util.Stack;
 public class BasicCalculator2 {
 
     public int calculate(String s) {
-        Stack<Integer> stack = new Stack();
+        Stack<Integer> stack = new Stack<>();
         int currentNumber = 0;
         char operation = '+';
         for (int i = 0; i < s.length(); i++) {

@@ -1,7 +1,5 @@
-import java.util.Map;
 import java.util.Stack;
 import java.util.List;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.*;
@@ -134,7 +132,7 @@ public class DataStructuresAlgorithms {
 		// 1. Java rounds down by default
 		// 2. Use this method for finding middle index to prevent Integer overflow
 		// if left, right or both are a large value (Integer.MAX_VALUE)
-		int pivot = left + (left + right) / 2;
+		int pivot = left + (right - left) / 2;
 		int potentialMatch = numbers[pivot];
 		if (potentialMatch == target) {
 			return pivot;
