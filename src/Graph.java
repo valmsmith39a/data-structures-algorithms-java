@@ -1,11 +1,13 @@
 
+import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Graph {
 	// Node lookup hash table
-	public HashMap<Integer, Node> nodeLookup = new HashMap<>();
+	public Map<Integer, Node> nodeLookup = new HashMap<>();
 
 	public class Node {
 		int id;
@@ -34,11 +36,11 @@ public class Graph {
 	public boolean hasPathDFS(int source, int destination) {
 		Node s = getNode(source);
 		Node d = getNode(destination);
-		HashSet<Integer> visited = new HashSet<Integer>();
+		Set<Integer> visited = new HashSet<Integer>();
 		return hasPathDFS(s, d, visited);
 	}
 
-	public boolean hasPathDFS(Node source, Node destination, HashSet<Integer> visited) {
+	public boolean hasPathDFS(Node source, Node destination, Set<Integer> visited) {
 		// Compares the reference (memory location) of source and destination Node
 		// objects
 		if (source == destination) {
@@ -64,7 +66,7 @@ public class Graph {
 
 	public boolean hasPathBFS(Node source, Node destination) {
 		LinkedList<Node> nextToVisit = new LinkedList<Node>();
-		HashSet<Integer> visited = new HashSet<Integer>();
+		Set<Integer> visited = new HashSet<Integer>();
 		// Adds to the end ("tail") of the list
 		nextToVisit.add(source);
 		while (!nextToVisit.isEmpty()) {
