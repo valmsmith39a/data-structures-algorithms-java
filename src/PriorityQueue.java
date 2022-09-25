@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class PriorityQueue {
-    
+     
     private int capacity;
     private int size = 0;
     private int[] heap;
@@ -45,7 +45,7 @@ public class PriorityQueue {
     }
 
     private int getParent(int childIndex) {
-        return heap[getParentIndex(index)];
+        return heap[getParentIndex(childIndex)];
     }
 
     private void swap(int index1, int index2) {
@@ -57,10 +57,10 @@ public class PriorityQueue {
     private void ensureCapacity() {
         if (size == capacity) {
             // Double the size of the capacity
-            heap = Arrays.copyOf(heap, capcity * 2);
+            heap = Arrays.copyOf(heap, capacity * 2);
         }
     }
-
+    
     // Runtime: O (log n)
     private void add(int item) {
         ensureCapacity();
@@ -96,7 +96,7 @@ public class PriorityQueue {
         int index = size - 1;
         while (hasParent(index) && getParent(index) > heap[index]) {
             swap(getParentIndex(index), index);
-            index = getParentIndex(index)
+            index = getParentIndex(index);
         }
     }
 
@@ -115,5 +115,23 @@ public class PriorityQueue {
             }
             index = smallestChildIndex;
         }
-   }
+    }
+
+    private void printQueue() {
+        for (int i : heap) {
+            System.out.println(i + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        PriorityQueue heap = new PriorityQueue(5);
+        heap.add(5);
+        heap.add(7);
+        heap.add(3);
+        heap.add(8);
+        heap.add(9);
+        heap.add(4);
+        // 3, 7, 4, 8, 9, 5, 0, 0, 0, 0
+        heap.printQueue();
+    }
 }
