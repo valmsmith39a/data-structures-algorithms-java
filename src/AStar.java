@@ -14,10 +14,9 @@ class AStar {
 	 * 
 	 * Context: 
 	 * 	1. Is a search algorithm. 
-	 * 	2. Is a variation of Dijkstra's Algorithm.
-	 * 	3. Is a Greedy algorithm.
-	 *
-	 *
-	 * 	
+     *  2. Is a pathfinding algorithm. 
+	 * 	3. Is a variation of Dijkstra's Algorithm.
+	 * 	4. Is a Greedy algorithm.
 	 */
+
 }
