@@ -3,56 +3,60 @@ import java.util.*;
 public class SuffixTrie {
     /**
      *
-     *  Suffix Trie 
+     * Suffix Trie
      *
-     *  Time Complexity to create the Suffix Trie: O(n^2), because for each character, iterate through all the characters to the end (like a double for loop)
-     *  Space Complexity to create the Suffix Trie: O(n^2) space 
+     * Time Complexity to create the Suffix Trie: O(n^2), because for each
+     * character, iterate through all the characters to the end (like a double for
+     * loop)
+     * Space Complexity to create the Suffix Trie: O(n^2) space
      *
-     *  Time Complexity to search for a suffix: O(n) time, because lookup character in hash map of each character 
-     *  Space Complexity to search for a suffix: O(1) time, no new memory used to search through suffix trie 
+     * Time Complexity to search for a suffix: O(n) time, because lookup character
+     * in hash map of each character
+     * Space Complexity to search for a suffix: O(1) time, no new memory used to
+     * search through suffix trie
      * 
-     *  History: 
-     *      Trie: Axel Thue in 1912 was first described by Axel Thue in 1912. Rene de la Briandais, in 1959, described tries in a computer context. In 1960, Edward Fredkin independently described the idea and coined the term trie "tree" (based on "retrieval").
+     * History:
+     * Trie: First described by Axel Thue in 1912. Rene de la Briandais, in 1959,
+     * described tries in a computer context. In 1960, Edward Fredkin independently
+     * described the idea and coined the term trie "tree" (based on "retrieval").
      *
      */
     TrieNode root = new TrieNode();
     char endSymbol = '*';
 
     public SuffixTrie(String str) {
-        populateSuffixTrieFrom(str);
+        populateSuffixTrie(str);
     }
 
     public class TrieNode {
         Map<Character, TrieNode> children = new HashMap<Character, TrieNode>();
     }
 
-    public void populateSuffixTrieFrom(String str) {
+    public void populateSuffixTrie(String str) {
         for (int i = 0; i < str.length(); i++) {
-            String word = str.substring(i);
-            TrieNode current = root;
-            for (Character c : word.toCharArray()) {
-                if (!current.children.containsKey(c)) {
-                    TrieNode trieNode = new TrieNode();
-                    current.children.put(c, trieNode);
+            TrieNode currentNode = root;
+            for (int j = i; j < str.length(); j++) {
+                char letter = str.charAt(j);
+                if (!currentNode.children.containsKey(letter)) {
+                    TrieNode newNode = new TrieNode();
+                    currentNode.children.put(letter, newNode);
                 }
-                current = current.children.get(c);
+                currentNode = currentNode.children.get(letter);
             }
-            current.children.put(endSymbol, null);
+            currentNode.children.put(endSymbol, null);
         }
     }
-   
+
     public boolean contains(String str) {
-        TrieNode current = root;
-        for (Character c : str.toCharArray()) {
-            if (!current.children.containsKey(c)) {
+        TrieNode currentNode = root;
+        for (int i = 0; i < str.length(); i++) {
+            char letter = str.charAt(i);
+            if (!currentNode.children.containsKey(letter)) {
                 return false;
             }
-            current = current.children.get(c);
+            currentNode = currentNode.children.get(letter);
         }
-        if (current.children.containsKey(endSymbol)) {
-            return true;
-        }
-        return false;
+        return currentNode.children.containsKey(endSymbol);
     }
 
     public static void main(String[] args) {
