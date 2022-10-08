@@ -1,26 +1,55 @@
 import java.util.*;
 
+/**
+ *
+ * Suffix Trie
+ * 
+ * Take a string and create a nested chain of TrieNodes.
+ * A TrieNode is an object containing a HashMap called children, which maps
+ * character keys to TrieNode values.
+ * 
+ * Example:
+ * “boba”
+ * Root TrieNode is
+ * {
+ * b: {
+ * o: { b: { a: { ‘*’: null}},
+ * a: { ‘*’: null }
+ * }
+ * o: { b: { a: { ‘*’: null }}}
+ * a: { ‘*’, null}
+ * }
+ * 
+ * app
+ * apple
+ * a: { p: { p: {‘*’: null, l: { e: { ‘*’: null}}}}}
+ * 
+ * User types:
+ * a, suggest: app, apple
+ * p -> app, apple
+ * p -> app, apple
+ * l -> apple
+ * 
+ * At each TrieNode, iterate through all the TrieNode and collect the words with
+ * end characters ‘*’,
+ * and show those word suggestions.
+ * 
+ * Time Complexity to create the Suffix Trie: O(n^2), because for each
+ * character, iterate through all the characters to the end (like a double for
+ * loop)
+ * Space Complexity to create the Suffix Trie: O(n^2) space
+ *
+ * Time Complexity to search for a suffix: O(n) time, because lookup character
+ * in hash map of each character
+ * Space Complexity to search for a suffix: O(1) time, no new memory used to
+ * search through suffix trie
+ * 
+ * History:
+ * Trie: First described by Axel Thue in 1912. Rene de la Briandais, in 1959,
+ * described tries in a computer context. In 1960, Edward Fredkin independently
+ * described the idea and coined the term trie "tree" (based on "retrieval").
+ */
 public class SuffixTrie {
-    /**
-     *
-     * Suffix Trie
-     *
-     * Time Complexity to create the Suffix Trie: O(n^2), because for each
-     * character, iterate through all the characters to the end (like a double for
-     * loop)
-     * Space Complexity to create the Suffix Trie: O(n^2) space
-     *
-     * Time Complexity to search for a suffix: O(n) time, because lookup character
-     * in hash map of each character
-     * Space Complexity to search for a suffix: O(1) time, no new memory used to
-     * search through suffix trie
-     * 
-     * History:
-     * Trie: First described by Axel Thue in 1912. Rene de la Briandais, in 1959,
-     * described tries in a computer context. In 1960, Edward Fredkin independently
-     * described the idea and coined the term trie "tree" (based on "retrieval").
-     *
-     */
     TrieNode root = new TrieNode();
     char endSymbol = '*';
 

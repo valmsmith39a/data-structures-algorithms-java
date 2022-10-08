@@ -30,22 +30,25 @@ public class LinkedList {
 		head = newHead;
 	}
 
-	public void deleteWithValue(int data) {
-		if (head == null)
-			return;
-		if (head.data == data) {
-			head = head.next;
-			return;
+	public Node remove(int data) {
+		if (head == null) {
+			return null;
 		}
-
+		if (head.data == data) {
+			Node removed = head;
+			head = head.next;
+			return removed;
+		}
 		Node current = head;
 		while (current.next != null) {
 			if (current.next.data == data) {
+				Node removed = current.next;
 				current.next = current.next.next;
-				return;
+				return removed;
 			}
 			current = current.next;
 		}
+		return null;
 	}
 
 	public void printLinkedList() {
@@ -78,7 +81,6 @@ public class LinkedList {
 		Node currentNode = head;
 		Node previousNode, nextNode;
 		previousNode = nextNode = null;
-
 		// Must operation on final node
 		// Cannot break out of loop before then
 		while (currentNode != null) {
@@ -99,18 +101,25 @@ public class LinkedList {
 			linkedList.append(value);
 		}
 
-		System.out.println("old head value" + linkedList.head.data);
-		// Prepend
-		linkedList.prepend(0);
-
-		System.out.println("new head value" + linkedList.head.data);
-
 		// Reverse a linked list
+		// Output: 1, 2, 3, 4, 5
 		System.out.println("Linked list original order: ");
 		linkedList.printLinkedList();
 		linkedList.reverseLinkedList();
+		// Output: 5, 4, 3, 2, 1
 		System.out.println("Reversed linked list: ");
 		linkedList.printLinkedList();
 
+		// Remove node 3
+		// Output: 5, 4, 2, 1
+		linkedList.remove(3);
+		System.out.println("Remove node 3, new linked list is: ");
+		linkedList.printLinkedList();
+
+		// Prepend
+		System.out.println("Test Prepend. Old head value: " + linkedList.head.data);
+		System.out.println("Prepend 0");
+		linkedList.prepend(0);
+		System.out.println("New head value: " + linkedList.head.data);
 	}
 }
