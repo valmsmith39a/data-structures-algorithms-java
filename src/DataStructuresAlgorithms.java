@@ -121,7 +121,16 @@ public class DataStructuresAlgorithms {
 	 * @return index of the target number or -1
 	 */
 	public int binarySearch(int[] numbers, int target, int left, int right) {
-		// base case with a stop condition
+		/**
+		 * Base case:
+		 * When get to final number (either first or last),
+		 * left == right, pivot index is 0 or lastIndex
+		 * In the next iteration, left and right will cross
+		 * because either left = pivot + 1 or right = pivot - 1,
+		 * depending on whether target is greater or less than
+		 * the potential match at the pivot index, indicating
+		 * search is complete.
+		 */
 		if (left > right) {
 			return -1;
 		}

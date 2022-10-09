@@ -33,6 +33,29 @@ public class Graph {
 		s.adjacent.add(d);
 	}
 
+	/**
+	 * Depth First Search
+	 * Key ideas:
+	 * 1. Call DFS on every child node.
+	 * 2. Use a Hash Set to track visited nodes
+	 * 
+	 * Time Complexity: O(V + E), V = number of vertices (visit each vertex), E =
+	 * number of edges (visit each child of each vertex)
+	 * Space Complexity: O(F), F = number of frames on the call stack, which is the
+	 * number of nodes from
+	 * source node to destination node, inclusive.
+	 * This is because we call DFS recursively on each child node.
+	 * Ex
+	 * source node: A, destination node: D
+	 * A -> B -> C -> D
+	 * We call DFS on node A.
+	 * Before DFS on node A gets resolved, we call DFS on node B.
+	 * Before DFS on node B gets resolved, we call DFS on node C.
+	 * Before DFS on node C gets resolved, we call DFS on node D.
+	 * At that point, there are 4 frames on the call stack (4 functions called).
+	 * Call on node D gets resolved, frame removed from the call stac.
+	 * Call on node C gets resolved, frame removed from the call stack,etc.
+	 */
 	public boolean hasPathDFS(int source, int destination) {
 		Node s = getNode(source);
 		Node d = getNode(destination);
@@ -58,6 +81,15 @@ public class Graph {
 		return false;
 	}
 
+	/**
+	 * Breadth First Search
+	 * Key Ideas:
+	 * 1. LinkedList nextToVisit to track all the nodes need to visit.
+	 * 2. HashSet visited to track all the visited nodes.
+	 * Time Complexity: O (V + E), V = number of vertices. E = number of edges.
+	 * Space Complexity: O(V), V = number of edges, because nextToVisit stores all
+	 * the vertices we need to visit.
+	 */
 	public boolean hasPathBFS(int source, int destination) {
 		Node s = getNode(source);
 		Node d = getNode(destination);

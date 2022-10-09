@@ -66,15 +66,17 @@ public class BinarySearchTree {
 	// For every node, swap left and right child nodes
 	// https://www.educative.io/edpresso/how-to-invert-a-binary-tree
 	public void invertBinaryTree(Node node) {
-		if (node != null) {
-			// swap left and right nodes
-			Node leftNode = node.left;
-			node.left = node.right;
-			node.right = leftNode;
-
-			invertBinaryTree(node.left);
-			invertBinaryTree(node.right);
+		// Base case
+		if (node == null) {
+			return;
 		}
+		// swap left and right nodes
+		Node leftNode = node.left;
+		node.left = node.right;
+		node.right = leftNode;
+
+		invertBinaryTree(node.left);
+		invertBinaryTree(node.right);
 	}
 
 	public static void main(String args[]) {
