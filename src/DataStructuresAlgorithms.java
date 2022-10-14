@@ -203,13 +203,17 @@ public class DataStructuresAlgorithms {
 	 * @return void
 	 */
 	public void quickSort(int[] numbers, int startIdx, int endIdx) {
+		/**
+		 * If startIdx > endIdx, return bc incorrect values.
+		 * If startIdx == endIdx, return bc only 1 number, nothing to sort.
+		 */
 		if (startIdx >= endIdx) {
 			return;
 		}
 		int pivotIdx = startIdx;
 		int leftIdx = startIdx + 1;
 		int rightIdx = endIdx;
-		while (rightIdx >= leftIdx) {
+		while (leftIdx < rightIdx) {
 			if (numbers[leftIdx] > numbers[pivotIdx] && numbers[rightIdx] < numbers[pivotIdx]) {
 				swap(numbers, leftIdx, rightIdx);
 			}
@@ -263,17 +267,21 @@ public class DataStructuresAlgorithms {
 	 * because we continuously divide the arrays in half.
 	 * 
 	 * Space Complexity:
-	 * O(n log n) space
+	 * O(n): array used to store sorted numbers
+	 * O(log n): number of frames on call stack when recursively call merge sort)
+	 * O(n log n)
 	 * 
 	 * @param numbers array of numbers
 	 * @return sorted array
 	 * 
 	 */
 	public int[] mergeSort(int[] numbers) {
+		// Base case: 1 element array
 		if (numbers.length == 1) {
 			return numbers;
 		}
 		int middleIdx = numbers.length / 2;
+		// Arrays.copyOfRange, start - inclusive, end - exclusive
 		int[] leftHalf = Arrays.copyOfRange(numbers, 0, middleIdx);
 		int[] rightHalf = Arrays.copyOfRange(numbers, middleIdx, numbers.length);
 		return mergeSortedArrays(mergeSort(leftHalf), mergeSort(rightHalf));
@@ -388,7 +396,7 @@ public class DataStructuresAlgorithms {
 		int[] numbers = new int[0];
 
 		/**
-		 * Two Number Sum
+		 * Two Number Sum/
 		 */
 		numbers = new int[] { 1, 5, 8, 2, 4, 9, 12 };
 		int targetSum = 21;
@@ -419,6 +427,7 @@ public class DataStructuresAlgorithms {
 		 */
 		numbers = new int[] { 8, 5, 2, 9, 5, 6, 3 };
 		problemSet.quickSort(numbers, 0, numbers.length - 1);
+		// Output: 2, 3, 5, 5, 6, 8, 9
 		System.out.print("Quick Sort. Sorted array is: ");
 		problemSet.printNumbersArray(numbers);
 		System.out.println();

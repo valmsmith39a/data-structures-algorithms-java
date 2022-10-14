@@ -1,12 +1,27 @@
+import java.util.*;
+
+/**
+ * LRU Cache - Least Recently Used Cache
+ * 
+ * 1. HashMap for cache
+ * a. key
+ * b. value: DoublyLinkedListNode
+ * 
+ * 2. DoublyLinkedList: get most/least recently used item in constant time
+ * a. addNode
+ * b. removeNode
+ * c. popTail
+ * d. moveToHead
+ */
 public class LRUCache2 {
-      
+
     private class DLinkedNode {
         int key;
         int value;
 
         DLinkedNode prev;
         DLinkedNode next;
-        
+
         private DLinkedNode(int key, int value) {
             this.key = key;
             this.value = value;
@@ -15,14 +30,14 @@ public class LRUCache2 {
 
     private void addNode(DLinkedNode node) {
         /*
-         * Link new node to prev / next nodes 
+         * Link new node to prev / next nodes
          * Recall we have pseudo head / pseudo tail
-         * in this implementation 
-         */ 
+         * in this implementation
+         */
         node.prev = head;
         node.next = head.next;
 
-        // Link prev / next nodes to new node 
+        // Link prev / next nodes to new node
         head.next.prev = node;
         head.next = node;
     }
@@ -32,9 +47,9 @@ public class LRUCache2 {
         DLinkedNode next = node.next;
 
         prev.next = next;
-        next.prev = prev; 
+        next.prev = prev;
     }
-  
+
     private void moveToHead(DLinkedNode node) {
         removeNode(node);
         addNode(node);
@@ -45,7 +60,7 @@ public class LRUCache2 {
         removeNode(removedNode);
         return removedNode;
     }
-    
+
     private Map<Integer, DLinkedNode> cache = new HashMap<>();
     private int size;
     private int capacity;
@@ -53,53 +68,55 @@ public class LRUCache2 {
 
     public LRUCache2(int capacity) {
         this.size = 0;
-        this.capacity = capacity;a
-       
+        this.capacity = capacity;
+        a
+
         /*
-         * We create pseudo head / pseudo tail 
+         * We create pseudo head / pseudo tail
          * nodes so we don't need to check for null
          * when updating (add / remove) list
-         * null <- (prev) head (next) <-> (prev) tail (next) -> null 
+         * null <- (prev) head (next) <-> (prev) tail (next) -> null
          */
         head = new DLinkedNode();
         tail = new DLinkedNode();
-        
+
         head.next = tail;
-        head.prev = null; 
+        head.prev = null;
 
         tail.prev = head;
         tail.next = null;
     }
-    
+
     public int get(int key) {
         DLinkedNode node = cache.get(key);
-        if (node == null) return -1;
+        if (node == null)
+            return -1;
 
-        // This node becomes the most recently used, 
-        // because it was just accessed. 
+        // This node becomes the most recently used,
+        // because it was just accessed.
         moveToHead(node);
 
         return node.value;
     }
-    
+
     public void put(int key, int value) {
         DLinkedNode node = cache.get(key);
         if (node == null) {
             DLinkedNode newNode = new DLinkedNode(key, value);
-            // Add node to cache 
+            // Add node to cache
             cache.put(key, newNode);
             // Add node to doubly linked list
             addNode(newNode);
 
             /*
-             * Increase size of the cache 
-             * because need to check size 
+             * Increase size of the cache
+             * because need to check size
              * to determine if need to evict
              * least recently used node from cache
-             */ 
-            ++size; 
+             */
+            ++size;
             // if not enough space in cache
-            // evict least recently used node 
+            // evict least recently used node
             // by removing from DLinkedList and cache
             if (size > capacity) {
                 DLinkedNode tail = popTail();
@@ -108,8 +125,8 @@ public class LRUCache2 {
             }
         } else {
             node.value = value;
-            // Updated node becomes the 
-            // most recently used node 
+            // Updated node becomes the
+            // most recently used node
             moveToHead(node);
         }
     }
