@@ -1,236 +1,131 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-class LRUCache {
-    /**
-     * 
-     * LRUCache: Least Recently Used Cache
-     * 
-     * Question:
-     * Implement LRUCache class which supports:
-     * 1. Insert key-value pairs with insertKeyValuePair method
-     * 2. Retrieve a key's value with getValueFromKey method
-     * 3. Retrieve the most recently used (most recently inserted/retrieved) key
-     * with getMostRecentlKey method.
-     *
-     * ***These methods should run in constant time.***
-     *
-     * maxSize: maximum number of key-value-pairs a cache can store.
-     *
-     * *** When adding a new key-value pair, if the maximum capacity
-     * has been reached, the least recently used key-value pair should
-     * be evicted from the cache, to make room for the new key-value pair. ***
-     * 
-     * 
-     * Key Insight:
-     * Use a hash table to map keys to doubly linked list nodes with head/tail
-     * nodes which track most/least recently used nodes (key/value pairs).
-     * 
-     * Ex
-     * key: "a", value: Node(key, value)
-     *
-     * c -> (c -> 3)
-     * ∧
-     * |
-     * ∨
-     * b -> (b -> 2)
-     * ∧
-     * |
-     * ∨
-     * a -> (a -> 1)
-     * 
-     * Doubly Linked List
-     * 1. Adding a new node
-     * 
-     * a (next) <-> (prev) new node (next) <-> (prev) b (next) <-> (prev) a (next)
-     * -> new node
-     * 
-     * newNode.next = b
-     * b.prev = newNode
-     * 
-     * a.next = newNode
-     * newNode.prev = a
-     *
-     * 
-     * 
-     * Resources:
-     * 1. https://www.geeksforgeeks.org/doubly-linked-list/
-     */
+public class LRUCache {
+    private Map<String, DoublyLinkedListNode> cache;
+    private int capacity;
+    private int size;
+    private DoublyLinkedListNode head;
+    private DoublyLinkedListNode tail;
 
-    Map<String, DoublyLinkedListNode> cache = new HashMap<String, DoublyLinkedListNode>();
-    int maxSize;
-    int currentSize = 0;
-    DoublyLinkedList listOfMostRecent = new DoublyLinkedList();
-
-    LRUCache(int maxSize) {
-        this.maxSize = maxSize > 1 ? maxSize : 1;
+    public LRUCache(int capacity) {
+        cache = new HashMap<>();
+        this.capacity = capacity;
+        size = 0;
+        head = new DoublyLinkedListNode();
+        tail = new DoublyLinkedListNode();
+        head.next = tail;
+        tail.prev = head;
+        head.prev = null;
+        tail.next = null;
     }
 
-    // O(1) time | O(1) space
-    void insertKeyValuePair(String key, int value) {
-        if (!cache.containsKey(key)) {
-            if (currentSize == maxSize) {
-                evictLeastRecent();
-            } else {
-                currentSize++;
-            }
-            cache.put(key, new DoublyLinkedListNode(key, value));
-        } else {
-            replaceKey(key, value);
-        }
-        // The node added to cache is the most recently used.
-        // So will be the head of the doubly linked list.
-        updateMostRecent(cache.get(key));
-    }
-
-    // O(1) time | O(1) space
-    LRUResult getValueFromKey(String key) {
-        if (!cache.containsKey(key)) {
-            return new LRUResult(false, -1);
-        }
-        // Node retrieved is the most recently used,
-        // so will be the head of the doubly linked list.
-        updateMostRecent(cache.get(key));
-        return new LRUResult(true, cache.get(key).value);
-    }
-
-    // O(1) time | O(1) space
-    String getMostRecentKey() {
-        if (listOfMostRecent.head == null) {
-            return "";
-        }
-        return listOfMostRecent.head.key;
-    }
-
-    void evictLeastRecent() {
-        String keyToRemove = listOfMostRecent.tail.key;
-        listOfMostRecent.removeTail();
-        cache.remove(keyToRemove);
-    }
-
-    void replaceKey(String key, int value) {
-        if (!this.cache.containsKey(key)) {
-            return;
-        }
-        cache.get(key).value = value;
-    }
-
-    void updateMostRecent(DoublyLinkedListNode node) {
-        listOfMostRecent.setHeadTo(node);
-    }
-
-    class DoublyLinkedList {
-        DoublyLinkedListNode head = null;
-        DoublyLinkedListNode tail = null;
-
-        void setHeadTo(DoublyLinkedListNode node) {
-            if (head == node) {
-                return;
-            } else if (head == null) {
-                head = node;
-                tail = node;
-            } else if (head == tail) {
-                /**
-                 * Single node that is head and tail
-                 * In a doubly linked list,
-                 * head.next = next node in the list (tail in this case)
-                 * tail.prev = head
-                 * so tail.prev = node, since node is new head
-                 */
-                tail.prev = node;
-                head = node;
-                head.next = tail;
-            } else {
-                if (tail == node) {
-                    removeTail();
-                }
-                node.removeBindings();
-                // node <-> head (previous head)
-                // Ex C <-> B <-> A, Add node C
-                // Need the previous head to connect to node first
-                head.prev = node;
-                node.next = head;
-                // Then assign node to head
-                head = node;
-            }
-        }
-
-        void removeTail() {
-            if (tail == null) {
-                return;
-            }
-            if (tail == head) {
-                head = null;
-                tail = null;
-                return;
-            }
-            tail = tail.prev;
-            tail.next = null;
-        }
-    }
-
-    class DoublyLinkedListNode {
+    private class DoublyLinkedListNode {
         String key;
         int value;
-        DoublyLinkedListNode prev = null;
-        DoublyLinkedListNode next = null;
+        DoublyLinkedListNode prev;
+        DoublyLinkedListNode next;
 
-        DoublyLinkedListNode(String key, int value) {
+        private DoublyLinkedListNode() {
+            // no-op
+        }
+
+        private DoublyLinkedListNode(String key, int value) {
             this.key = key;
             this.value = value;
         }
+    }
 
-        void removeBindings() {
-            // C <-> B <-> A
-            // setNodeToHead(B)
-            if (prev != null) {
-                prev.next = next;
+    private void addNode(DoublyLinkedListNode node) {
+        // Connect node to next / prev
+        node.next = head.next;
+        node.prev = head;
+        // Connect next / prev to node
+        head.next.prev = node;
+        head.next = node;
+    }
+
+    private void removeNode(DoublyLinkedListNode node) {
+        node.next.prev = node.prev;
+        node.prev.next = node.next;
+    }
+
+    private DoublyLinkedListNode popTail() {
+        DoublyLinkedListNode poppedNode = tail.prev;
+        removeNode(poppedNode);
+        return poppedNode;
+    }
+
+    private void moveToHead(DoublyLinkedListNode node) {
+        removeNode(node);
+        addNode(node);
+    }
+
+    public int get(String key) {
+        DoublyLinkedListNode node = cache.get(key);
+        if (node == null)
+            return -1;
+        // When get an item, it becomes the most recently used.
+        moveToHead(node);
+        return node.value;
+    }
+
+    public void put(String key, int value) {
+        if (!cache.containsKey(key)) {
+            if (size == capacity) {
+                DoublyLinkedListNode evictedNode = popTail();
+                cache.remove(evictedNode.key);
+                size--;
             }
-            if (next != null) {
-                next.prev = prev;
-            }
-            prev = null;
-            next = null;
+            DoublyLinkedListNode newNode = new DoublyLinkedListNode(key, value);
+            cache.put(key, newNode);
+            addNode(newNode);
+            size++;
+        } else {
+            DoublyLinkedListNode node = cache.get(key);
+            node.value = value;
+            moveToHead(node);
         }
     }
 
-    class LRUResult {
-        boolean found;
-        int value;
-
-        public LRUResult(boolean found, int value) {
-            this.found = found;
-            this.value = value;
-        }
+    public String getMostRecentKey() {
+        return head.next.key;
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         LRUCache lruCache = new LRUCache(3);
-        System.out.println("LRUCache. Key-value pairs inserted: {\"a\": 1}, {\"b\", 2}, {\"c\", 3}max size is 3");
-        lruCache.insertKeyValuePair("a", 1);
-        lruCache.insertKeyValuePair("b", 2);
-        lruCache.insertKeyValuePair("c", 3);
-
-        // Get most recent key
-        String mostRecentKey = lruCache.getMostRecentKey();
-        // Expected: c
-        System.out.println("Most recent key is: " + mostRecentKey);
+        lruCache.put("a", 1);
+        lruCache.put("b", 2);
+        lruCache.put("c", 3);
 
         // Get value from key
-        LRUResult result = lruCache.getValueFromKey("c");
-        // Expected: 3
-        System.out.println("Get value from key \"c\": " + result.value);
+        int value = lruCache.get("c");
+        // Expect: 3
+        System.out.println("Get value from key \"c\": " + value);
 
-        // Insert key-value pair beyond capacity of 3
-        System.out.println("insert key-value pair beyond capacity, {\"d\", 4}");
-        lruCache.insertKeyValuePair("d", 4);
-        mostRecentKey = lruCache.getMostRecentKey();
-        // Expected: d
-        System.out.println("Most recent key is: " + mostRecentKey);
+        // Get most recent key
+        String mostRecentKey1 = lruCache.getMostRecentKey();
+        // Expect: c
+        System.out.println("Get most recent key: " + mostRecentKey1);
 
-        // Demonstrate successful eviction of least recently used key-value pair in
-        // cache
-        LRUResult result2 = lruCache.getValueFromKey("a");
-        // Expected: null
-        System.out.println("{a:1} should have been evicted. Try to get value from key a " + result2.value);
+        // Put more values than capacity of cache
+        lruCache.put("d", 4);
+        lruCache.put("e", 5);
+
+        // Get most recent key
+        String mostRecentKey2 = lruCache.getMostRecentKey();
+        // Expect: e
+        System.out.println("Insert more values than capacity. Most recent key is: " + mostRecentKey2);
+
+        /**
+         * Demonstrate successful eviction of least recently used key-value pair.
+         * Expect for both cases: -1
+         */
+        int evicted1 = lruCache.get("a");
+        int evicted2 = lruCache.get("b");
+        int nodeC = lruCache.get("c");
+        System.out.println("{ a: 1 } should have been evicted. Try to get value from key \"a\":" + evicted1);
+        System.out.println("{ b: 2 } should have been evicted. Try to get value from key \"b\":" + evicted2);
+        System.out.println("{ c: 3 } should still be in cache. Try to get value from key \"c\":" + nodeC);
     }
 }
