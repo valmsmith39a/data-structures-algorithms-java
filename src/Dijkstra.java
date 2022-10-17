@@ -47,14 +47,20 @@ public class Dijkstra {
 	 * the minDistances array to track the min distances from start node to every
 	 * other node in the graph.
 	 * 
-	 * 
-	 * 
 	 * Steps:
 	 * 1. Initialize all min distances from start to each vertex to infinity
 	 * 2. Traverse the graph while visited != number of vertices
 	 * 3. Get the current vertex with min distance and has not been visited
 	 * 4. Skip current min distance == infinity (because it means it's an
 	 * unconnected vertex)
+	 * 
+	 * Steps Version 2:
+	 * 1. Create minDistances array to track min distances from start vertex to
+	 * every other vertex.
+	 * 2. Create visited Set to track visited vertices.
+	 * 3. Visit each vertex in the graph. In each iteration, visit the vertex that
+	 * has the shortest min distance
+	 * to the starting vertex that has not been visited.
 	 * 
 	 * Adjacency list.
 	 * Edge: [destination, distance]
@@ -119,18 +125,18 @@ public class Dijkstra {
 				// New potential min distance from destination to starting node
 				int newPathDistance = currentMinDistance + distanceToDestination;
 				// Current min distance from destination to starting node
-				int currentDestinationDistance = minDistances[destination];
-				if (newPathDistance < currentDestinationDistance) {
+				int minDistanceOfDestination = minDistances[destination];
+				if (newPathDistance < minDistanceOfDestination) {
 					minDistances[destination] = newPathDistance;
 				}
 			}
 		}
-		return Arrays.stream(minDistances).map(distance -> {
-			if (distance == MAX_VALUE) {
-				return -1;
+		for (int i = 0; i < minDistances.length; i++) {
+			if (minDistances[i] == Integer.MAX_VALUE) {
+				minDistances[i] = -1;
 			}
-			return distance;
-		}).toArray();
+		}
+		return minDistances;
 	}
 
 	// Get the next vertex, which has not been visited, with the minimum distance to
