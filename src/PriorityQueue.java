@@ -1,15 +1,25 @@
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
+/**
+ * Priority Queue using a Min Heap
+ * 
+ * Resources:
+ * 1. Visualization: https://www.cs.usfca.edu/~galles/visualization/Heap.html
+ * 
+ * Summary:
+ * 1. heap (array), capacity, size
+ * 2. Methods to build the heap: Parent, Child, Heapify Up, Heapify Down, Swap
+ * 3. Priority Queue methods: (1) Add, (2) Peak (3) Poll (remove)
+ */
 public class PriorityQueue {
-     
-    private int capacity;
-    private int size = 0;
     private int[] heap;
+    private int capacity;
+    private int size;
 
     public PriorityQueue(int capacity) {
         this.capacity = capacity;
-        this.heap = new int[capacity];
+        this.size = 0;
+        heap = new int[capacity];
     }
 
     private int getLeftChildIndex(int parentIndex) {
@@ -20,20 +30,8 @@ public class PriorityQueue {
         return 2 * parentIndex + 2;
     }
 
-    private int getParentIndex(int index) {
-        return (index - 1) / 2;
-    }
-
-    private boolean hasLeftChild(int index) {
-        return getLeftChildIndex(index) < size;
-    }
-
-    private boolean hasRightChild(int index) {
-        return getRightChildIndex(index) < size;
-    }
-
-    private boolean hasParent(int index) {
-        return getParentIndex(index) >= 0;
+    private int getParentIndex(int childIndex) {
+        return (childIndex - 1) / 2;
     }
 
     private int getLeftChild(int parentIndex) {
@@ -48,21 +46,44 @@ public class PriorityQueue {
         return heap[getParentIndex(childIndex)];
     }
 
-    private void swap(int index1, int index2) {
-        int element = heap[index1];
-        heap[index1] = heap[index2];
-        heap[index2] = element;
+    private boolean hasLeftChild(int parentIndex) {
+        return getLeftChildIndex(parentIndex) < size;
+    }
+
+    private boolean hasRightChild(int parentIndex) {
+        return getRightChildIndex(parentIndex) < size;
+    }
+
+    private boolean hasParent(int childIndex) {
+        return getParentIndex(childIndex) >= 0;
+    }
+
+    public int getSize() {
+        return this.size;
+    }
+
+    public void print() {
+        int queueSize = this.size;
+        for (int i = 0; i < queueSize; i++) {
+            System.out.println(heap[i]);
+        }
+    }
+
+    private void swap(int i, int j) {
+        int item = heap[i];
+        heap[i] = heap[j];
+        heap[j] = item;
     }
 
     private void ensureCapacity() {
         if (size == capacity) {
-            // Double the size of the capacity
-            heap = Arrays.copyOf(heap, capacity * 2);
+            capacity *= 2;
+            heap = Arrays.copyOf(heap, capacity);
         }
     }
-    
+
     // Runtime: O (log n)
-    private void add(int item) {
+    public void add(int item) {
         ensureCapacity();
         heap[size] = item;
         size++;
@@ -70,29 +91,26 @@ public class PriorityQueue {
     }
 
     // Runtime: O(1)
-    private int peak() {
+    public int peak() {
         if (size == 0) {
-            throw new NoSuchElementException();
+            return -1;
         }
         return heap[0];
     }
 
-    /*
-     * Remove and return element with highest priority (ex min)
-     */
-    private int poll() {
+    public int poll() {
         if (size == 0) {
-            throw new NoSuchElementException();
+            return -1;
         }
-        int element = heap[0];
-        swap(0, size - 1);
+        int item = heap[0];
+        heap[0] = heap[size - 1];
         size--;
         heapifyDown();
-        return element;
+        return item;
     }
 
-    // Runtime: O(log n) in worst case
-    private void heapifyUp() {
+    // Runtime: O(log n) worst case
+    public void heapifyUp() {
         int index = size - 1;
         while (hasParent(index) && getParent(index) > heap[index]) {
             swap(getParentIndex(index), index);
@@ -100,11 +118,11 @@ public class PriorityQueue {
         }
     }
 
-    // Runtime: O(log n) in worst case
-    private void heapifyDown() {
+    // Runtime: O(log n) worst case
+    public void heapifyDown() {
         int index = 0;
         while (hasLeftChild(index)) {
-            int smallestChildIndex = getLeftChild(index);
+            int smallestChildIndex = getLeftChildIndex(index);
             if (hasRightChild(index) && getRightChild(index) < getLeftChild(index)) {
                 smallestChildIndex = getRightChildIndex(index);
             }
@@ -117,21 +135,34 @@ public class PriorityQueue {
         }
     }
 
-    private void printQueue() {
-        for (int i : heap) {
-            System.out.println(i + " ");
-        }
-    }
-
     public static void main(String[] args) {
-        PriorityQueue heap = new PriorityQueue(5);
-        heap.add(5);
-        heap.add(7);
-        heap.add(3);
-        heap.add(8);
-        heap.add(9);
-        heap.add(4);
-        // 3, 7, 4, 8, 9, 5, 0, 0, 0, 0
-        heap.printQueue();
+        PriorityQueue queue = new PriorityQueue(5);
+        queue.add(3);
+        queue.add(5);
+        queue.add(4);
+        queue.add(1);
+        queue.add(2);
+        int size = queue.getSize();
+        // Print the queue. Expected: 1, 2, 4, 5, 3
+        System.out.println("Print the queue: ");
+        queue.print();
+
+        // Peak. Expected: 1
+        System.out.println("Peak (get first element (root node in min heap) in the queue): ");
+        System.out.println(queue.peak());
+
+        // Poll: Remove an item. Expected: 1
+        System.out.println("Poll: Remove item from queue with highest priority (smallest in this case)");
+        System.out.println(queue.poll());
+
+        // Print the queue. Expected: 2, 3, 4, 5
+        System.out.println("Print the queue: ");
+        queue.print();
+
+        // Poll each element in the queue. Expected: 2, 3, 4, 5
+        System.out.println("Poll each element in the queue: ");
+        for (int i = 0; i < size; i++) {
+            System.out.println(queue.poll());
+        }
     }
 }
