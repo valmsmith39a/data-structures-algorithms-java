@@ -1,97 +1,174 @@
 import java.util.*;
-import java.util.stream.Collectors;
+/**
+ *  Min Heap 
+ *
+ *  Problem: 
+ *  Build a min heap (parent node smaller than 2 child nodes) from an array of integers. 
+ *
+ *  Summary: 
+ *  1. Start with last parent node.
+ *  2. Sift the last parent node down.
+ *  3. Move to the previous node and sift that node down.
+ */
+public class MinHeap {
+    private int[] heap;
+    private int capacity;
+    private int size;
 
-class MinHeap {
-
-    List<Integer> heap = new ArrayList<Integer>();
-
-    public MinHeap(List<Integer> list) {
-        heap = buildHeap(list);            
+    public MinHeap(int[] numbers) {
+        heap = buildHeap(numbers);
+        capacity = numbers.length;
+        size = capacity;
     }
 
-    /*
-     * Build min heap by applying sift down on every single parent node, 
-     * starting from the last parent node of the binary heap.  
-     */
-    public List<Integer> buildHeap(List<Integer> list) {
-        int size = list.size();
-        int lastParentIndex = getLastParentIndex(size);
-        for (int i = lastParentIndex; i >= 0; i++) {
-            siftDown(i, size - 1,  list);
+    private int getLeftChildIndex(int parentIndex) {
+        return 2 * parentIndex + 1;
+    }
+
+    private int getRightChildIndex(int parentIndex) {
+        return 2 * parentIndex + 2;
+    }
+
+    private int getParentIndex(int childIndex) {
+        return (childIndex - 1) / 2;
+    }
+
+    private int getLeftChild(int parentIndex, int[] array) {
+        return array[getLeftChildIndex(parentIndex)];
+    }
+
+    private int getRightChild(int parentIndex, int[] array) {
+        return array[getRightChildIndex(parentIndex)];
+    }
+
+    private int getParent(int childIndex, int[] array) {
+        return array[getParentIndex(childIndex)];
+    }
+
+    private boolean hasLeftChild(int parentIndex, int[] array) {
+        return getLeftChildIndex(parentIndex) < array.length;
+    }
+
+    private boolean hasRightChild(int parentIndex, int[] array) {
+        return getRightChildIndex(parentIndex) < array.length;
+    }
+
+    private boolean hasParent(int childIndex, int[] array) {
+        return getParentIndex(childIndex) >= 0;
+    }
+
+    private void swap(int i, int j, int[] array) {
+        int item = array[i];
+        array[i] = array[j];
+        array[j] = item;
+    }
+
+    /**
+     * Runtime: O(n) time 
+     * Iterate through all the nodes: O(n)
+     * For each node, call siftDown which is O(log n). 
+     * But the majority of siftDown calls are on nodes near the bottom 
+     * of the tree, which O(1) time (can only sift down once for the bottom parent nodes).
+     * Can represent runtime as a taylor series which converges to O(n) time  
+     */ 
+    private int[] buildHeap(int[] numbers) {
+        int firstParentIndex = getParentIndex(numbers.length - 1);
+        for (int i = firstParentIndex; i >= 0; i--) {
+            siftDown(i, numbers);
         }
-        return heap;
-    }
-    
-    private int getLastParentIndex(int size) {
-       return (size - 2) / 2; 
+        return numbers;
     }
 
-    private void siftDown(int currentIndex, int lastIndex, List<Integer> heap) {
-        int leftChildIndex = getLeftChildIndex(currentIndex, heap);
-        while (leftChildIndex <= lastIndex) {
-            int smallestChildIndex = leftChildIndex;
-            int rightChildIndex = getRightChildIndex(currentIndex, heap);
-            if (rightChildIndex <= lastIndex 
-                && heap.get(rightChildIndex)) {
-                smallestChildIndex = rightChildIndex;
+    // O(log n) time | O(1) space (re-order nodes in-place) 
+    private void siftDown(int index, int[] heap) {
+        if (hasLeftChild(index, heap)) {
+            int smallestChildIndex = getLeftChildIndex(index);
+            if (hasRightChild(index, heap) && getRightChild(index, heap) < getLeftChild(index, heap)) {
+                smallestChildIndex = getRightChildIndex(index);
             }
-            // If current value < value of smallest child, min heap property 
-            // satisfied at that node in binary heap.  
-            if (heap.get(currentIndex) < heap.get(smallestChildIndex)) {
-                break;
+            if (heap[index] < heap[smallestChildIndex]) {
+                return;
             } else {
-                swap(currentIndex, smallestChildIndex);
+                swap(index, smallestChildIndex, heap);
+                index = smallestChildIndex;
             }
-            currentIndex = smallestChildIndex;
         }
     }
 
-    private void siftUp(int currentIndex, List<Integer> heap) {
-        int parentIndex = getParentIndex(currentIndex, List<Integer> heap);
-        while (parentIndex >= 0 && heap.get(parentIndex) > heap.get(currentIndex)) {
-            swap(currentIndex, parentIndex, heap);
-            currentIndex = parentIndex;
-            parentIndex = getParentIndex(currentIndex);
+    // O(log n) time | O(1) space (re-order nodes in-place)
+    private void siftUp(int index, int[] heap) {
+        if (hasParent(index, heap) && heap[index] < getParent(index, heap)) {
+            swap(index, getParentIndex(index), heap);
+            index = getParentIndex(index);
+            siftUp(index, heap);
         }
     }
 
-    private void insert(int value) {
-        heap.add(value);
-        siftUp(heap.size() - 1, heap);
-    }
-
-    // Remove the root node 
-    private int remove() {
-        swap(0, heap.size() - 1, heap);
-        int removedValue = heap.remove(heap.size() - 1);
-        siftDown(0, heap.size() - 1, heap);
-        return removedValue
-    }
-    
-    private int getLeftChildIndex(int currentIndex, List<Integer> heap) {
-        return 2 * currentIndex + 1;
-    }
-    
-    private int getRightChildIndex(int currentIndex, List<Integer> heap) {
-        return 2 * currentIndex + 2;
-    }
-
-    private int peek() {
-        return heap.get(0);
-    }
-
-    private int getParentIndex(int childIndex, List<Integer> heap) {
-        return (childIndex - 1) / 2; 
-    }
-   
-    private void printHeap(List<Integer> heap) {
-        for (int i = 0; i < heap.size(); i++) {
-            System.out.print(heap[i] + " "); 
+    public void ensureCapacity() {
+        if (size == capacity) {
+            capacity *= 2;
+            heap = Arrays.copyOf(heap, capacity);
         }
     }
-    public static void main(String args[]) {
-        List<Integer> list = new ArrayList<>(Arrays.asList(48, 12, 24, 7, 8, -5, 24, 391, 24, 56, 2, 6, 8, 41));
-        MinHeap minHeap = new MinHeap(list);
 
+    // O(log n) time | O(1) space 
+    public void add(int item) {
+        ensureCapacity();
+        heap[size] = item;
+        size++;
+        siftUp(size - 1, heap);
+    }
+
+    // O(1) time | O(1) space;
+    public int peak() {
+        if (this.heap.length == 0) {
+            return -1;
+        }
+        return this.heap[0];
+    }
+
+    // O(log n) time | O(1) space  
+    public int poll() {
+        if (size == 0) {
+            return -1;
+        }
+        int item = heap[0];
+        heap[0] = heap[size - 1];
+        size--;
+        siftDown(0, heap);
+        return item;
+    }
+
+    public void print() {
+        for (int i = 0; i < size; i++) {
+            System.out.println(heap[i]);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = new int[] { 3, 5, 2, 4, 1 };
+        int[] displayedNumbers = Arrays.copyOf(numbers, numbers.length);
+        MinHeap heap = new MinHeap(numbers);
+
+        // Heapify the array. Expected: 1, 3, 2, 4, 5
+        System.out.println("Heapify the following array: " + Arrays.toString(displayedNumbers));
+        heap.print();
+
+        // Add 0 to the heap. Expected: 0, 3, 1, 4, 5, 2
+        System.out.println("Add 0 to the heap");
+        heap.add(0);
+        heap.print();
+
+        // Poll (remove), expected: 0
+        System.out.println("Poll (remove number with highest priority) from heap");
+        int polledValue = heap.poll();
+        System.out.println("Polled value is: " + polledValue);
+        // Expected: 1, 3, 2, 4, 5
+        System.out.println("Heap is now: "); 
+        heap.print();
+
+        // Peak (read the root node), expected: 1 
+        int item = heap.peak();
+        System.out.println("Peak: " + item);
     }
 }
