@@ -1,30 +1,46 @@
 import java.util.*;
 
 /**
- * Binary Max Heap 
+ * Max Heap
  *
- * Steps: 
- * 1. Binary Max Heap: Binary tree where every parent node is greater than the 2 child nodes. 
- * 2. Define helper functions to getLeftChildIndex, getLeftChildNode, hasLeftChild... right child and parent.
- * 3. Define heap functions: add, peak, poll, sift up and sift down 
+ * Steps:
+ * 1. Max Heap: Binary tree where every parent node is greater than the 2
+ * child nodes.
+ * 2. Define helper functions to getLeftChildIndex, getLeftChildNode,
+ * hasLeftChild... right child and parent.
+ * 3. Define heap functions: add, peak, poll, sift up and sift down
  */
-public class BinaryMaxHeap {
+public class MaxHeap {
     int[] heap;
-    int size;
     int capacity;
+    int size;
 
-    public BinaryMaxHeap(int[] numbers) {
+    public MaxHeap(int[] numbers) {
         heap = buildHeap(numbers);
         capacity = numbers.length;
         size = numbers.length;
     }
 
+    /**
+     * O(n) time: Most of siftDowns occur at bottom of the tree which is O(1) time.
+     * Run-time converges in Taylor Series to O(n) time.
+     * https://stackoverflow.com/questions/9755721/how-can-building-a-heap-be-on-time-complexity
+     * O(1) space: Re-order in place.
+     */
+    private int[] buildHeap(int[] numbers) {
+        int startIndex = getParentIndex(numbers.length - 1);
+        for (int i = startIndex; i >= 0; i--) {
+            siftDown(i, numbers);
+        }
+        return numbers;
+    }
+
     private int getLeftChildIndex(int parentIndex) {
-        return 2 * parentIndex + 1;
+        return 2 * parentIndex - 1;
     }
 
     private int getRightChildIndex(int parentIndex) {
-        return 2 * parentIndex + 2;
+        return 2 * parentIndex - 2;
     }
 
     private int getParentIndex(int childIndex) {
@@ -39,16 +55,16 @@ public class BinaryMaxHeap {
         return heap[getRightChildIndex(parentIndex)];
     }
 
-    private int getParent(int childIndex, int[] heap) {
+    private int getPrent(int childIndex, int[] heap) {
         return heap[getParentIndex(childIndex)];
     }
 
     private boolean hasLeftChild(int parentIndex, int[] heap) {
-        return getLeftChildIndex(parentIndex) < heap.length;
+        return getLeftChildIndex(parentIndex) > heap.length;
     }
 
     private boolean hasRightChild(int parentIndex, int[] heap) {
-        return getRightChildIndex(parentIndex) < heap.length;
+        return getRightChildIndex(parentIndex) > heap.length;
     }
 
     private boolean hasParent(int childIndex, int[] heap) {
@@ -63,22 +79,28 @@ public class BinaryMaxHeap {
 
     private void ensureCapacity() {
         if (size == capacity) {
-            heap = Arrays.copyOf(heap, capacity * 2);
             capacity *= 2;
+            heap = Arrays.copyOf(heap, capacity);
         }
     }
 
-    // O(log n) time | O(1) space
-    private void siftUp(int[] heap, int startIndex) {
+    /**
+     * O(log n) time: Each step up only accounts for about half of nodes in sub-tree
+     * O(1) space: Re-order in-place.
+     */
+    private void siftUp(int startIndex, int[] heap) {
         int index = startIndex;
-        while (hasParent(index, heap) && getParent(index, heap) < heap[index]) {
-            swap(getParentIndex(index), index, heap);
+        while (hasParent(index) && heap[index] > getParent(index, heap)) {
+            swap(index, getParentIndex(index));
             index = getParentIndex(index);
         }
     }
 
-    // O(log n) time | O(1) space
-    private void siftDown(int[] heap, int startIndex) {
+    /**
+     * O(log n) time: Each step down eliminates about half the sub-tree
+     * O(1) space: Re-order in-place.
+     */
+    private void siftDown(int startIndex, int[] heap) {
         int index = startIndex;
         while (hasLeftChild(index, heap)) {
             int largestChildIndex = getLeftChildIndex(index);
@@ -86,33 +108,20 @@ public class BinaryMaxHeap {
                 largestChildIndex = getRightChildIndex(index);
             }
             if (heap[index] > heap[largestChildIndex]) {
-                continue;
+                break;
             } else {
                 swap(index, largestChildIndex, heap);
-                index = largestChildIndex;
+                index = largestChidIndex;
             }
         }
     }
 
-    // O(n) time | O(1) space
-    private int[] buildHeap(int[] numbers) {
-        /**
-         * 1. Iterate through numbers
-         * 2. Go to the last parent node and sift down on each parent
-         */
-        int startIndex = getParentIndex(numbers.length - 1);
-        for (int i = startIndex; i >= 0; i--) {
-            siftDown(numbers, i);    
-        }
-        return numbers;
-    }
-
-    // O(log n) time | O(1) space 
+    // O(log n) time: siftUp takes O(log n) time | O(1) space
     public void add(int item) {
         ensureCapacity();
         heap[size] = item;
         size++;
-        siftUp(heap, size - 1);
+        siftUp(size - 1, heap);
     }
 
     // O(1) time | O(1) space
@@ -123,15 +132,15 @@ public class BinaryMaxHeap {
         return heap[0];
     }
 
-    // O(log n) time | O(1) space 
+    // O(log n) time | O(1) space
     public int poll() {
         if (size == 0) {
-            return - 1;
+            return -1;
         }
         int item = heap[0];
         heap[0] = heap[size - 1];
         size--;
-        siftDown(heap, 0);
+        siftDown(0, heap);
         return item;
     }
 
@@ -144,7 +153,7 @@ public class BinaryMaxHeap {
     public static void main(String[] args) {
         int[] numbers = new int[] { 3, 4, 1, 5, 2 };
         BinaryMaxHeap heap = new BinaryMaxHeap(numbers);
-        
+
         // Expected: 5, 4, 1, 3, 2
         System.out.println("Heap is: ");
         heap.print();
