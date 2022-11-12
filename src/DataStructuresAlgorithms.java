@@ -91,63 +91,6 @@ public class DataStructuresAlgorithms {
 		return stack.isEmpty();
 	}
 
-	/**
-	 * Binary Search
-	 * 
-	 * Problem: Return index of target element or -1
-	 * 
-	 * Key idea: Search for target by recursively dividing the array in
-	 * half and look for the target in either the left or right half. Each
-	 * iteration reduces the search space by 1/2.
-	 * 
-	 * Steps:
-	 * 1. Left/Right pointers at beginning/end of array
-	 * 2. Check terminal (base) case: left index > right index
-	 * 3. Compute floor of middle index
-	 * 4. Check 3 cases:
-	 * a. target == potentialMatch
-	 * b. target < potentialMatch => look in left half of array
-	 * c. target > potentialMatch => look in right half of array
-	 * 
-	 * Time/Space Complexity:
-	 * O(log n) time: eliminate 1/2 of elements in each iteration
-	 * For iterative approach, O(1) space (constant space): no elements stored
-	 * For recursive approach, O(log n) space:
-	 * 
-	 * @param numbers array of numbers
-	 * @param target  target number
-	 * @param left    left pointer index
-	 * @param right   right pointer index
-	 * @return index of the target number or -1
-	 */
-	public int binarySearch(int[] numbers, int target, int left, int right) {
-		/**
-		 * Base case:
-		 * When get to final number (either first or last),
-		 * left == right, pivot index is 0 or lastIndex
-		 * In the next iteration, left and right will cross
-		 * because either left = pivot + 1 or right = pivot - 1,
-		 * depending on whether target is greater or less than
-		 * the potential match at the pivot index, indicating
-		 * search is complete.
-		 */
-		if (left > right) {
-			return -1;
-		}
-		// 1. Java rounds down by default
-		// 2. Use this method for finding middle index to prevent Integer overflow
-		// if left, right or both are a large value (Integer.MAX_VALUE)
-		int pivot = left + (right - left) / 2;
-		int potentialMatch = numbers[pivot];
-		if (potentialMatch == target) {
-			return pivot;
-		}
-		if (target > potentialMatch) {
-			return binarySearch(numbers, target, pivot + 1, right);
-		}
-		return binarySearch(numbers, target, left, pivot - 1);
-	}
-
 	public void printList(List<List<Integer>> elements) {
 		for (List<Integer> el : elements) {
 			System.out.println(el.toString());
@@ -178,14 +121,5 @@ public class DataStructuresAlgorithms {
 		System.out.println("Balanced Brackets. Expression is: "
 				+ expression
 				+ " Is balanced brackets? " + problemSet.isBalancedBrackets(expression));
-
-		/**
-		 * Binary Search
-		 */
-		numbers = new int[] { 2, 5, 6, 9, 15, 19, 23 };
-		int target = 19;
-		int resultBinarySearch = problemSet.binarySearch(numbers, target, 0, numbers.length);
-		System.out.println("Binary Search. " + "Target is: " + target + " Index of target is: " + resultBinarySearch);
-
 	}
 }
