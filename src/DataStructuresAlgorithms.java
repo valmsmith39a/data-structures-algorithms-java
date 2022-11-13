@@ -10,46 +10,6 @@ import java.util.*;
 public class DataStructuresAlgorithms {
 
 	/**
-	 * Basic Hash Table: Two Number Sum
-	 * 
-	 * Problem: Return 2 numbers that equal the target sum or [].
-	 * 
-	 * Key idea: potentialMatch = targetSum - num
-	 * 
-	 * Strategy: iterate through the array, search for potential match (number
-	 * when added to current number will produce target sum) by storing numbers in
-	 * a simple hash table and performing a constant time lookup.
-	 * 
-	 * Steps:
-	 * 1. Create a basic hash table.
-	 * 2. Iterate through array.
-	 * 3. potentialMatch = targetSum - num
-	 * 4. Lookup potentialMatch in hash table and return array of number and
-	 * potentialMatch
-	 * 5. If potentialMatch not found, store number in hash table
-	 * 
-	 * Time/Space Complexity:
-	 * O(n) time: iterate through the entire list
-	 * O(n) space: store n numbers in the hash table
-	 * 
-	 * @param numbers   array of numbers
-	 * @param targetSum desired sum
-	 * @return array of number and potential match or null
-	 * 
-	 */
-	public int[] twoNumberSum(int[] numbers, int targetSum) {
-		HashMap<Integer, Boolean> numbersHashMap = new HashMap<>();
-		for (int number : numbers) {
-			int potentialMatch = targetSum - number;
-			if (numbersHashMap.containsKey(potentialMatch)) {
-				return new int[] { potentialMatch, number };
-			}
-			numbersHashMap.put(number, true);
-		}
-		return new int[] {};
-	}
-
-	/**
 	 * Balanced Brackets
 	 * 
 	 * Key idea:
@@ -98,20 +58,8 @@ public class DataStructuresAlgorithms {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Hello Metaverse");
 
 		DataStructuresAlgorithms problemSet = new DataStructuresAlgorithms();
-		int[] numbers = new int[0];
-
-		/**
-		 * Two Number Sum/
-		 */
-		numbers = new int[] { 1, 5, 8, 2, 4, 9, 12 };
-		int targetSum = 21;
-		int[] resultTwoNumberSum = problemSet.twoNumberSum(numbers, targetSum);
-		System.out.println(resultTwoNumberSum);
-		System.out.println("Two Number Sum. Target sum is: " + targetSum + " solution is: " + resultTwoNumberSum[0]
-				+ ", " + resultTwoNumberSum[1]);
 
 		/**
 		 * Balanced Brackets
