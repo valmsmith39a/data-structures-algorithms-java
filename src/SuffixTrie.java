@@ -4,13 +4,20 @@ import java.util.*;
  *
  * Suffix Trie
  * 
+ * Create a Suffix Trie to determin if a string is a suffix in a string. 
+ * Ex 
+ * "boba"
+ * "bob" is not a suffix 
+ * "oba" is a suffix 
+ *
  * Take a string and create a nested chain of TrieNodes.
  * A TrieNode is an object containing a HashMap called children, which maps
  * character keys to TrieNode values.
  * 
  * Example:
  * “boba”
- * Root TrieNode is
+ * Root TrieNode is an object with a field - children. 
+ * root.children is:
  * {
  * b: {
  * o: { b: { a: { ‘*’: null}},
@@ -19,21 +26,8 @@ import java.util.*;
  * o: { b: { a: { ‘*’: null }}}
  * a: { ‘*’, null}
  * }
- * 
- * app
- * apple
- * a: { p: { p: {‘*’: null, l: { e: { ‘*’: null}}}}}
- * 
- * User types:
- * a, suggest: app, apple
- * p -> app, apple
- * p -> app, apple
- * l -> apple
- * 
- * At each TrieNode, iterate through all the TrieNode and collect the words with
- * end characters ‘*’,
- * and show those word suggestions.
- * 
+ *
+ * Need to remember that current node is the TrieNode and children is the property to access to get the mapping from character to next TrieNode.    
  * Time Complexity to create the Suffix Trie: O(n^2), because for each
  * character, iterate through all the characters to the end (like a double for
  * loop)
@@ -44,6 +38,21 @@ import java.util.*;
  * Space Complexity to search for a suffix: O(1) time, no new memory used to
  * search through suffix trie
  * 
+ * Part of how work completion could work using principles of Trie 
+ * app
+ * apple
+ * a: { p: { p: {‘*’: null, l: { e: { ‘*’: null}}}}}
+ * 
+ * User types:
+ * a, suggest: app, apple
+ * p -> app, apple
+ * p -> app, apple
+ * l -> apple
+ *  
+ * At each TrieNode, iterate through all the TrieNode and collect the words with
+ * end characters ‘*’,
+ * and show those word suggestions.
+ *
  * History:
  * Trie: First described by Axel Thue in 1912. Rene de la Briandais, in 1959,
  * described tries in a computer context. In 1960, Edward Fredkin independently
