@@ -1,3 +1,17 @@
+/**
+ * Linked List
+ * 
+ * In Singly Linked List, in java, the structure is:
+ * (Head) 1 -> (next) 2 -> (next) 3 (Tail)
+ * 
+ * First in, first out.
+ * Add to new node to tail.
+ * Remove from head.
+ * 
+ * Side note:
+ * In Doubly Linked List in LRU Cache, structure is:
+ * Pseudo Head (prev) <-> (next) 1 (prev) <-> (next) 2 <-> 3 <-> Pseudo Tail
+ */
 public class LinkedList {
 	private Node head;
 
