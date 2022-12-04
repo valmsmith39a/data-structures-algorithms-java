@@ -93,6 +93,7 @@ public class NumberOfIslands {
 
         NumberOfIslands numberOfIslands = new NumberOfIslands();
         int totalIslands = numberOfIslands.getNumberOfIslands(grid1);
+        // Expected: 1
         System.out.println("Total number of islands is: " + totalIslands);
 
         char[][] grid2 = new char[][] { {} };
@@ -110,6 +111,7 @@ public class NumberOfIslands {
         }
 
         int totalIslandsGrid2 = numberOfIslands.getNumberOfIslands(grid2);
+        // Expected: 3
         System.out.println("Total number of islands is: " + totalIslandsGrid2);
     }
 }
