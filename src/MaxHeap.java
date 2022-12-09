@@ -111,7 +111,7 @@ public class MaxHeap {
                 break;
             } else {
                 swap(index, largestChildIndex, heap);
-                index = largestChidIndex;
+                index = largestChildIndex;
             }
         }
     }
