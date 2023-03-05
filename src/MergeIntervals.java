@@ -15,7 +15,7 @@ public class MergeIntervals {
      *      1. Sort the intervals by the start number.
      *      2. Because it's sorted by the start number, 
      *         if you see an interval with a start number 
-     *         greater than or equal to the end number of the 
+     *         less than the end number of the 
      *         most recent interval in the list of merged intervals,
      *         then that interval should be merged with that interval. 
      *
@@ -33,7 +33,7 @@ public class MergeIntervals {
      */
     
     public int[][] merge(int[][] intervals) {
-        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
         LinkedList<int[]> merged = new LinkedList<>();
         for (int[] interval : intervals) {
             if (merged.isEmpty() || merged.getLast()[1] < interval[0]) {

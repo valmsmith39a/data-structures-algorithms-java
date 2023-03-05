@@ -9,7 +9,7 @@ import java.util.*;
  *
  * HashSet: Store each node in HashSet and check each node to see if there is a duplicate. 
  * O(n) time: Traverse linked list
- * O(n) s[ace: Store each node hash set. 
+ * O(n) space: Store each node hash set. 
  *
  * Solution 2: 
  *
@@ -19,6 +19,16 @@ import java.util.*;
  * O(1) space: use 2 pointers. 
  */ 
 public class LinkedListCycle {
+
+	static class ListNode {
+		public int val;
+		public ListNode next;
+
+		ListNode(int x) {
+			val = x;
+			next = null;
+		}
+	}
 
 	// HashSet method: O(n) time, O(n) space
 	public boolean hasCycle(ListNode head) {
@@ -50,4 +60,36 @@ public class LinkedListCycle {
 		}
 		return true;
 	}
+
+	public boolean hasCycleFloyd2(ListNode head) {
+		if (head == null) {
+			return false;
+		}
+		ListNode slow = head;
+		ListNode fast = head;
+		while (fast != null & fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+			if (slow == fast) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void main(String[] args) {
+		ListNode n1 = new ListNode(1);
+		ListNode n2 = new ListNode(2);
+		ListNode n3 = new ListNode(3);
+		n1.next = n2;
+		n2.next = n3;
+		n3.next = n2; // Cycle 
+
+		LinkedListCycle llc = new LinkedListCycle(); 
+		Boolean hasCycle = llc.hasCycleFloyd2(n1);
+		System.out.println("Linked list has cycle: " + hasCycle);
+	}
+
 }
+
+
