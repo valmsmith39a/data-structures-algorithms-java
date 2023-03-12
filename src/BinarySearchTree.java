@@ -5,6 +5,11 @@
  * 3. Right child > parent
  * 4. No duplicate values
  * 
+ * Traversal:
+ * In-order traversal: left, root, right
+ * Pre-order traversal: root, left, right
+ * Post-order traversal: left, right, root
+ *  
  * @author George Wee
  * @version 1.0
  * 
