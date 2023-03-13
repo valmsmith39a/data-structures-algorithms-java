@@ -6,7 +6,15 @@ import java.util.PriorityQueue;
  * Find the median of a stream of numbers.
  * 
  * Key insights: 
- * Use 2 heaps to track the left and right half of the stream.
+ * 1. Use 2 heaps to track the left and right half of the stream.
+ * 2. maxHeap: store the smaller half of the stream
+ * 3. minHeap: store the larger half of the stream 
+ * 4. Must keep the size of the 2 heaps balanced
+ * 
+ * Walkthrough of solution: 
+ * Data stream: 5, 2, 7, 9, 1, 3, 4
+ * maxHeap(smaller half): 2, 1, 3
+ * minHeap(larger half):  7, 9, 5
  * 
  * Time Complexity:
  * 	1. addNum: O(log n): O(log n) for heap insert, O(1) for heap poll
