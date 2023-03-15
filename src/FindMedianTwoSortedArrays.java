@@ -10,6 +10,20 @@
  *  2. Imagine the 2 arrays are merged into 1 array. Half of the elements in the merged array are smaller than the median.
  *  3. You know the index of the median in the merged array. You just need to figure out which numbers are to the left and 
  *     right of the median.
+ *  
+ *  nums1 = [1, 2, 3]
+ *	nums2 = [4, 5, 6, 7]
+ *  low: 0, 2, 3
+ *	high: 3
+ *	i: 1, 2, 3
+ *	j: 3, 2, 1
+ *	[x, x, x, x]
+ *  [1, 2, 3, 4]
+ *  left1: 1, 2, 3*
+ *	right1: 2, 3, MAX_VALUE
+ *	left2: 6, 5, 4**
+ *	right2: 7, 6, 5
+ *  return Math.max(3, 4) => 4
  */
 public class FindMedianTwoSortedArrays {
 
