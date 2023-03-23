@@ -16,6 +16,7 @@ public class CloudStorageService {
                     res[i] = addFile(query);
                     break;
                 case "COPY_FILE": 
+                    res[i] = copyFile(query);
                     break;
                 
                 case "GET_FILE_SIZE": 
@@ -39,24 +40,37 @@ public class CloudStorageService {
         return true;
     }
 
-    private String findFile(String[] query) {
+    private boolean copyFile(String[] query) {
         String filename = query[1];
-        String prefix = query[2];
-        String suffix = query[3];
-        List<String[]> filesFound = new ArrayList<>();
-        Map.Entry<String,String> filenames = storage.entrySet(); 
-        String filesFoundStr = ""; 
-        for (String filename : filenames) {
+        String newFilename = query[2];
+        if (!storage.containsKey(filename) && storage.containskey(newFilename)) {
+            return false; 
+        }
+        storage.put(newFilename, storage.get(filename));
+        return true;
+    }
+
+    private String findFile(String[] query) {
+        String filename = query[0];
+        String prefix = query[1];
+        String suffix = query[2];
+        Set<String> filenames = storage.keySet();
+        List<String[]> foundNames = new ArrayList<>();
+
+        for (int i = 0; i < filenames.length; i++) {
+            String filename = filenames[i];
             if (filename.startsWith(prefix) && filename.endsWith(suffix)) {
-                filesFound.add(new int[] { filename.getKey(), filename.getValue() }; 
+                foundNames.add(new String[] { filename, storage.get(filename)});
             }
         }
-        filesFound.sort((a, b) -> b - a);
-        for (int i = 0; i < filesFound.size(); i++) {
-            filesFoundStr += file[0] + "(" + file[1] + ")";
-            if (i < filesFound.size() - 1) {
-                filesFoundStr += ", ";
+        Collections.sort(foundNames, (a, b) -> Integer.value(b[1]) - Integer.value(a[1]));
+        String foundStr = "";
+        for (int i = 0; i < foundNames.length; i++) {
+            foundStr += foundNames.get(i)[0] + "(" + foundNames.get(i)[1] + ")";
+            if (i < foundNames.length - 1) {
+                foundStr += ", ";
             }
         }
+        return foundStr;
     }
 }
