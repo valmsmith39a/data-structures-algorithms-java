@@ -2,7 +2,11 @@ import java.util.*;
 
 /**
  * Problem: Rotate image 
- *
+ * 
+ * Key Insights: 
+ * 1. Use left, right, top, bottom to traverse the matrix 
+ * 2. Save topLeft and move in counter clockwise; 
+ * 
  * Time complexity: O(n2) time
  * Space complexity: O(1) space
  *
