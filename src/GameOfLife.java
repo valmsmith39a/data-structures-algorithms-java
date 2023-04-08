@@ -128,3 +128,4 @@ class GameOfLife {
         life.printBoard(board);
     }
 }
+
