@@ -1,5 +1,20 @@
 import java.util.*;
 
+/**
+ * Problem: Minimum Window Substring
+ * 
+ * Description:
+ * Given a string s and string t, find the minimum window substring of s that
+ * contains all the characters of t, including repeating characters.
+ * 
+ * Key Insights:
+ * 1. 2 maps for window and t (needed characters)
+ * 2. Keep track of counts need and have
+ * 3. When need == have, move left pointer and decrement count in window map
+ * 
+ * Time Complextity: O(n), because interate through string once
+ * Space Complexity: O(n), because of hash maps to store character and counts;
+ */
 public class MinimumWindowSubstring {
 
 	public String minWindow(String s, String t) {
@@ -34,5 +49,14 @@ public class MinimumWindowSubstring {
 			}
 		}
 		return res;
+	}
+
+	public static void main(String[] args) {
+		String s = "ADOBECODEBANC";
+		String t = "ABC";
+		MinimumWindowSubstring mws = new MinimumWindowSubstring();
+		String substring = mws.minWindow(s, t);
+		// Expected: BANC
+		System.out.println(substring);
 	}
 }
