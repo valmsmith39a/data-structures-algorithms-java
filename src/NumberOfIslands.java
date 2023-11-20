@@ -36,6 +36,9 @@ public class NumberOfIslands {
      * 3. When return to initial double for loop, the entire cluster will be flipped
      * from '1' to '0',
      * and that counts as 1 island.
+     * 
+     * Time Complexity: O(M*N), bc visit each cell once 
+     * Space Comlexity: O(M*N), memory used on the recursive stack, in worst case where all 1s (land)
      **/
 
     void dfs(char[][] grid, int r, int c) {
