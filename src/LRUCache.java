@@ -1,5 +1,17 @@
 import java.util.HashMap;
 import java.util.Map;
+/**
+ * LRU Cache 
+ * 
+ * Key Points: 
+ * 1. HashMap is cache. 
+ * 2. Doubly linked list with to get most recently used (at head of linked list (head.next, bc dummy head))
+ * and least recently used (at tail of the linked list (tail.prev, bc dummy tail))
+ * 
+ * Diagram: 
+ * head (dummy head) (next) <-> (prev) newNode (next) <-> (prev) tail (dummy tail)
+ * 
+ */
 
 public class LRUCache {
     private Map<String, DoublyLinkedListNode> cache;
