@@ -12,6 +12,18 @@ import java.util.*;
  * Time/Space Complexity: 
  * O(1) time because number of bits for an integer is set (8-bit, 16-bit, 32-bit, 64-bit).
  * O(1) space because always storing a set number of bits. 
+ * 
+ *   3 + 3 = 6 
+ *
+ *   a = 0011
+ *   b = 0011
+ *
+ *   carry: 0110, 0000        
+ *   a:     0000, 0110*
+ *   b:     0110, 0000
+ *
+ *   a = 0110 = 6
+ *
  */
 public class SumOfTwoIntegersBitwiseOp {
     /**
@@ -21,9 +33,9 @@ public class SumOfTwoIntegersBitwiseOp {
      */ 
     public int getSumIterative(int a, int b) {
         while (b != 0) {
-            int temp = (a & b) << 1;
+            int carry = (a & b) << 1;
             a = a ^ b;
-            b = temp;
+            b = carry;
         }
         return a;
     }
