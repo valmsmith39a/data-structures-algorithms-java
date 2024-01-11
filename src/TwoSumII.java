@@ -1,21 +1,22 @@
-import java.util.*;
 
 public class TwoSumII {
 
     public int[] twoSumII(int[] numbers, int target) {
         int left = 0;
-        int right = numbers.length -1;
+        int right = numbers.length - 1;
+
         while (left < right) {
-            int sum = numbers[left] + numbers[right];
-            if (sum == target) {
+            int currentSum = numbers[left] + numbers[right];
+
+            if (currentSum == target) {
                 return new int[] { left + 1, right + 1 };
-            } else if (sum > target) {
-                right--;
+            } else if (currentSum < target) {
+                left++;
             } else {
-                left--;
+                right--;
             }
         }
-        returnt new int[] { -1, -1 };
+        return new int[0];
     }
 }
 
