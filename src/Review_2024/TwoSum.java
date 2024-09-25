@@ -2,6 +2,11 @@ package Review_2024;
 import java.util.Map;
 import java.util.HashMap;
 
+/** 
+ * Key: HashMap to store numbers, Complement = Target - currentNumber 
+ * Time Complexity: O(n): iterate through the list once 
+ * Space Complexity: O(n): in worst case, store all the numbers in the list
+ */
 public class TwoSum {
 
     public int[] twoSum(int[] nums, int target) {
