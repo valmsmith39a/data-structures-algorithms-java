@@ -10,6 +10,21 @@ import java.util.Map;
  * 
  * Diagram: 
  * head (dummy head) (next) <-> (prev) newNode (next) <-> (prev) tail (dummy tail)
+ *
+ * Time Complexity: 
+ * 	1. GET (get from cache): O(1)
+ * 		a. Get node from HashMap is O(1) time 
+ * 		b. Move node to HEAD of Doubly linked list is O(1) time 
+ * 	2. PUT (insert into cache): O(1)
+ * 		a. If key exists, replace value is O(1) time 
+ * 		b. If key does not exist, add new node to hash map and doubly linked list are O(1) time 
+ * Space Complexity: 
+ * 	1. Cache is O(capacity) 
+ * 	2. Doubly linked list is O(capacity) or can think of as O(1) constant space 
+ *
+ * Final Notes: 
+ * 1. Cannot use Singly Linked List to achieve O(1) deletion even with a tail, because need to access tail's previous node
+ * 2. Can use Singly Linked List however to achieve O(1) insertion if keep track of HEAD. newNode.next = HEAD. HEAD = newNode 
  * 
  */
 
