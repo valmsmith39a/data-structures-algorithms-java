@@ -23,36 +23,37 @@ import java.util.ArrayList;
  */
 public class CourseSchedule {
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
-		Map<Integer, List<Integer>> adj = new HashMap<>();
-		for (int[] pre : prerequisites) {
-			adj.putIfAbsent(pre[1], new ArrayList<>());
-			adj.get(pre[1]).add(pre[0]);
-		}
+		Map<Integer, List<Integer>> graph = new HashMap<>();
 		int[] inDegree = new int[numCourses];
-		for (List<Integer> courses : adj.values()) {
-			for (int course : courses) {
-				inDegree[course]++;
-			}
+
+		for (int[] pre : prerequisites) {
+			int course = pre[0];
+			int prereq = pre[1];
+			graph.putIfAbsent(prereq, new ArrayList<>());
+			graph.get(prereq).add(course);
+			inDegree[course]++;
 		}
+
 		Queue<Integer> queue = new LinkedList<>();
-		int count = 0;
 		for (int i = 0; i < numCourses; i++) {
 			if (inDegree[i] == 0) {
 				queue.offer(i);
-				count++;
 			}
 		}
 
+		int processedCourses = 0;
 		while (!queue.isEmpty()) {
-			int course = queue.poll();
-			for (int nextCourse : adj.getOrDefault(course, new ArrayList<>())) {
-				inDegree[nextCourse]--;
-				if (inDegree[nextCourse] == 0) {
-					queue.offer(nextCourse);
-					count++;
+			int current = queue.poll();
+			processedCourses++;
+
+			List<Integer> courses = graph.getOrDefault(current, new ArrayList<>());
+			for (int course : courses) {
+				inDegree[course]--;
+				if (inDegree[course] == 0) {
+					queue.offer(course);
 				}
 			}
 		}
-		return count == numCourses;
+		return processedCourses == numCourses;
 	}
 }
