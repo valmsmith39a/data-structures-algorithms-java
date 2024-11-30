@@ -1,6 +1,43 @@
 package Review_2024;
 
+import java.util.List;
+import java.util.ArrayList;
+
+/**
+ * Permutations: #46
+ * Strategy: Backtracking
+ * 
+ * Time Complexity: O(n x n!):
+ * n = length of nums
+ * Takes O(n) time to find each permutation
+ * Finds n! permutations.
+ * 
+ * Space Complexity: O(n x n!):
+ * Takes O(n) space to store each permutation.
+ * n! permutations.
+ * 
+ */
 public class Permutations {
+
+	public List<List<Integer>> permute(int[] nums) {
+		List<List<Integer>> result = new ArrayList<>();
+		backtrack(nums, new ArrayList<>(), result);
+		return result;
+	}
+
+	private void backtrack(int[] nums, List<Integer> tempList, List<List<Integer>> result) {
+		if (tempList.size() == nums.length) {
+			result.add(new ArrayList<>(tempList));
+		} else {
+			for (int num : nums) {
+				if (tempList.contains(num))
+					continue;
+				tempList.add(num);
+				backtrack(nums, tempList, result);
+				tempList.remove(tempList.size() - 1);
+			}
+		}
+	}
 
 }
 
