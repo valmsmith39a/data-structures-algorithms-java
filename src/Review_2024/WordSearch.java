@@ -8,7 +8,7 @@ package Review_2024;
  * Iterate through each cell, do 4 searcher on each cell, go L characters deep
  * on each search
  * 
- * Space Complexity:
+ * Space Complexity: O(L) - recursion depth
  * 
  */
 public class WordSearch {
