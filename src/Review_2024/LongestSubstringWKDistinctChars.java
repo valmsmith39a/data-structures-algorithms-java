@@ -3,6 +3,11 @@ package Review_2024;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * #340 Longest Substring With At Most K Distinct Characters
+ * Time Complexity: O(n)
+ * Space Complexity: O(k)
+ */
 public class LongestSubstringWKDistinctChars {
 
 	public int longestSubstringWKDistinctChars(String s, int k) {
