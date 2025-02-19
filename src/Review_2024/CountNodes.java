@@ -20,7 +20,10 @@ package Review_2024;
 public class CountNodes {
 
 	public int countNodes(Node root) {
-		return root != null ? 1 + countNodes(root.left) + countNodes(root.right) : 0;
+		if (root == null) {
+			return 0;
+		}
+		return countNodes(root.left) + countNodes(root.right) + 1;
 	}
 
 	private static class Node {
