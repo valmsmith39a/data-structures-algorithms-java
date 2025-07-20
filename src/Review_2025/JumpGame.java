@@ -13,8 +13,7 @@ public class JumpGame {
 		// Find max reach at each index
 		int maxReach = 0;
 		for (int i = 0; i < nums.length; i++) {
-			// Or i > maxReach
-			if (maxReach <= i) {
+			if (maxReach < i) {
 				return false;
 			}
 			maxReach = Math.max(maxReach, i + nums[i]);
