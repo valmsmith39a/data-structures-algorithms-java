@@ -64,7 +64,7 @@ public class BinarySearch {
         int[] numbers = new int[] { 2, 5, 6, 9, 15, 19, 23 };
         BinarySearch search = new BinarySearch();
         int target = 19;
-        int resultBinarySearch = search.binarySearch(numbers, target, 0, numbers.length);
+        int resultBinarySearch = search.binarySearch(numbers, target, 0, numbers.length - 1);
         // Target is: 19 Index of target is: 5
         System.out.println("Binary Search. " + "Target is: " + target + " Index of target is: " + resultBinarySearch);
     }
