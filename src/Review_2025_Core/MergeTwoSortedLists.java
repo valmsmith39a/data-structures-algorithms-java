@@ -5,6 +5,8 @@ package Review_2025_2;
  * Time Complexity: O(m + n), m: number of nodes in list 1, n: number of nodes
  * in list 2
  * Space Complexity: O(1)
+ * 
+ * Recursive solution
  */
 
 public class MergeTwoSortedLists {
