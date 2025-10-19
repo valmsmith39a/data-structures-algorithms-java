@@ -3,15 +3,16 @@ import java.util.*;
 /**
  * Problem: Group Anagrams (#49)
  * 
- * Key Insights: 
+ * Key Insights:
  * 1. Use Hash Map to track same anagrams
- * 2. Sort the strings to determine which strings are anagrams 
+ * 2. Sort the strings to determine which strings are anagrams
  * 
- * Time Complexity: O(N * K log K), where N: number of anagrams, K: average (or max if want worst case) length of string 
+ * Time Complexity: O(N * K log K), where N: number of anagrams, K: average (or
+ * max if want worst case) length of string
  * Space Complexity: O(N * K)
  */
 public class GroupAnagrams {
-    
+
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> anagramGroups = new HashMap<>();
 
@@ -19,7 +20,7 @@ public class GroupAnagrams {
             char[] chArr = str.toCharArray();
             Arrays.sort(chArr);
             String sortedStr = new String(chArr);
-            
+
             if (anagramGroups.containsKey(sortedStr)) {
                 anagramGroups.get(sortedStr).add(str);
             } else {
@@ -30,5 +31,17 @@ public class GroupAnagrams {
         }
         List<List<String>> res = new ArrayList<>(anagramGroups.values());
         return res;
+    }
+
+    // Alternate implementation with Lambda
+    public List<List<String>> groupAnagramsAlternate(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
+            char[] charArray = str.toCharArray();
+            Arrays.sort(charArray);
+            String sortedStr = new String(charArray);
+            map.computeIfAbsent(sortedStr, k -> new ArrayList<>()).add(str);
+        }
+        return new ArrayList<>(map.values());
     }
 }
