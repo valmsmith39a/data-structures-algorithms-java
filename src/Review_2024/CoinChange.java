@@ -20,6 +20,9 @@ public class CoinChange {
 			for (int i = coin; i <= amount; i++) {
 				// Either the min number of coins to make up the amount is dp[i]
 				// Or it's the current coin (1) + min number of coins at amount i - coin
+				// value of i = value of coin + value of coin - value of i. i = coin + (i -
+				// coin)
+				// dp[coin] = 1 coin. dp[i - coin] = min number of coins to get dp[i - coin]
 				dp[i] = Math.min(dp[i], dp[i - coin] + 1);
 			}
 		}
