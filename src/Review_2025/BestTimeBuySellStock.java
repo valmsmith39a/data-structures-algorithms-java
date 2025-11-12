@@ -1,4 +1,4 @@
-package Review_2025_100;
+package Review_2025;
 
 /**
  * Time Complexity: O(n), traverse the list once
