@@ -4,6 +4,13 @@ import java.util.HashSet;
 /**
  * Time Complexity: O(n)
  * Space Complexity: O(n)
+ * nums = [1,2,3,1]
+ * 
+ * i num seen
+ * 0 1 [1]
+ * 1 2 [1,2]
+ * 2 3 [1,2,3]
+ * 3 1 return true
  */
 public class ContainsDuplicate {
 
