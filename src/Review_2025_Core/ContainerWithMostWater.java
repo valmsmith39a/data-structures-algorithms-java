@@ -1,6 +1,14 @@
-/**
- * Time Complexity: O(n), hit each element in the array once
- * Space Complexity:O(1), constant space regardless of input size
+/* 
+	Time Complexity: O(n), hit each element in the array once
+	Space Complexity:O(1), constant space regardless of input size
+  
+	height = [1,8,6,2,5,4,8,3,7]
+	index:   [0,1,2,3,4,5,6,7,8]
+
+	left   right   width   height   area   maxArea 
+	0      8        8          1    8         8
+	1      8        7          7    49       49
+	1      7        6          3    18       4
  */
 public class ContainerWithMostWater {
 
