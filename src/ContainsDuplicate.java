@@ -1,6 +1,10 @@
 import java.util.Set;
 import java.util.HashSet;
 
+/**
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
+ */
 public class ContainsDuplicate {
 
 	public boolean containsDuplicate(int[] nums) {
