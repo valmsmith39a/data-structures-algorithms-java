@@ -1,0 +1,38 @@
+package Review_2025;
+
+/**
+ * Time Complexity: O(1) for hit and getHits
+ * Space Complexity: O(1) for hit and getHits
+ */
+public class DesignHitCounter {
+	private final int[] times;
+	private final int[] counts;
+
+	public DesignHitCounter() {
+		times = new int[300];
+		counts = new int[300];
+	}
+
+	public void hit(int timestamp) {
+		int idx = timestamp % 300;
+		if (times[idx] != timestamp) {
+			times[idx] = timestamp;
+			counts[idx] = 1;
+		} else {
+			counts[idx]++;
+		}
+	}
+
+	public int getHits(int timestamp) {
+		int total = 0;
+
+		for (int i = 0; i < 300; i++) {
+			if (timestamp - times[i] < 300) {
+				total += counts[i];
+			}
+		}
+
+		return total;
+	}
+
+}
