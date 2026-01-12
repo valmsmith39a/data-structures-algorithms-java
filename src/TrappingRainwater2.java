@@ -1,3 +1,7 @@
+/**
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
 public class TrappingRainwater2 {
 
 	public int trap(int[] height) {
