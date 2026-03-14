@@ -1,4 +1,4 @@
-public class ContainerMostWater {
+public class ContainerWithMostWaterTwoPointers {
 
     public int findMaxWater(int[] height) {
         int left = 0;
@@ -16,7 +16,7 @@ public class ContainerMostWater {
         return maxArea;
     }
     public static void main(String[] args) {
-        ContainerMostWater container = new ContainerMostWater();
+        ContainerWithMostWaterTwoPointers container = new ContainerWithMostWaterTwoPointers();
         int[] height = { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
         int maxArea = container.findMaxWater(height);
         System.out.println("Heights of sides are: " );

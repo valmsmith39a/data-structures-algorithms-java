@@ -14,7 +14,7 @@
  * 
  * Space Complexity: O(m * n)
  */
-public class EditDistance {
+public class EditDistance2D {
     
     public int minDistance(String word1, String word2) {
         int m = word1.length();

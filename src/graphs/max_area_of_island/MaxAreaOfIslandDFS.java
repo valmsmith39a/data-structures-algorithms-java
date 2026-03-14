@@ -6,7 +6,7 @@
  * Space Complexity: O(r * c) from recursive call stack in worst case of all
  * land, O(1) if we don't count the call stack
  */
-public class MaxAreaOfIsland {
+public class MaxAreaOfIslandDFS {
 
 	private int currArea;
 

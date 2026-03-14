@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-class DecodeWays {
+class DecodeWaysMemoizedDFS {
     
     Map<Integer, Integer> memo = new HashMap<>();
 
@@ -38,7 +38,7 @@ class DecodeWays {
     }
 
     public static void main(String[] args) {
-        DecodeWays decode = new DecodeWays();
+        DecodeWaysMemoizedDFS decode = new DecodeWaysMemoizedDFS();
         // Remember to run cases one at a time bec hashmap saved, will affect next solution
         // System.out.println("123 decoded is: " + decode.numDecodings("123"));
         System.out.println("2326 decoded is: " + decode.numDecodings("2326"));

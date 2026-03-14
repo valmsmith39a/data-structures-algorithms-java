@@ -17,7 +17,7 @@
  * 
  * Space Complexity: O(n), the dynamic programming (DP) array 
  */
-public class HouseRobber {
+public class HouseRobberDP {
 
     public int rob(int[] nums) {
         if (nums == null || nums.length == 0) {

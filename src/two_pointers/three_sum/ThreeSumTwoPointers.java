@@ -1,4 +1,4 @@
-public class ThreeSum {
+public class ThreeSumTwoPointers {
 	public List<List<Integer>> threeSum(int[] nums) {
 		List<List<Integer>> res = new ArrayList<>();
 		if (nums == null || nums.length < 3) {

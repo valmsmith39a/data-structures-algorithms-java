@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-public class NetworkDelayTimePQ {
+public class NetworkDelayTimeDijkstraPQ {
 
     public int networkDelayTime(int[][] times, int n, int k) {
         Map<Integer, List<int[]>> graph = new HashMap<>();

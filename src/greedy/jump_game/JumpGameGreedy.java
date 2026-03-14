@@ -12,7 +12,7 @@
  * Time Complexity: O(n)
  * Space Complexity: O(1)
  */
-public class JumpGame {
+public class JumpGameGreedy {
  
     public boolean canJump(int[] nums) {
         int maxReach = 0;

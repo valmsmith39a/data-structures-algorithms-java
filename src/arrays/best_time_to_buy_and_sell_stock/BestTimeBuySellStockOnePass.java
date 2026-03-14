@@ -11,7 +11,7 @@ import java.util.*;
  * Space Complexity: 
  * O(1) space: Only track 2 variables (minBuyPrice and maxProfit) for any arbitrary number of prices. 
  */
-public class BestTimeBuySellStock {
+public class BestTimeBuySellStockOnePass {
 	
 	public int getMaxProfit(int[] prices) {
 		int minBuyPrice = Integer.MAX_VALUE;
@@ -29,7 +29,7 @@ public class BestTimeBuySellStock {
 
 	public static void main(String[] args) {
 		int[] prices = new int[]{ 7, 1, 5, 3, 6, 4 };
-		BestTimeBuySellStock bt = new BestTimeBuySellStock();
+		BestTimeBuySellStockOnePass bt = new BestTimeBuySellStockOnePass();
 		int maxProfit = bt.getMaxProfit(prices);
 		System.out.println("Max profit is: " + maxProfit);
 	}

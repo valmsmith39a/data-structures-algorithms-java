@@ -1,4 +1,4 @@
-public class NumberOfIslands {
+public class NumberOfIslandsDFS {
     /**
      * Number of Islands
      * 
@@ -94,7 +94,7 @@ public class NumberOfIslands {
             System.out.println(grid1[i]);
         }
 
-        NumberOfIslands numberOfIslands = new NumberOfIslands();
+        NumberOfIslandsDFS numberOfIslands = new NumberOfIslandsDFS();
         int totalIslands = numberOfIslands.getNumberOfIslands(grid1);
         // Expected: 1
         System.out.println("Total number of islands is: " + totalIslands);

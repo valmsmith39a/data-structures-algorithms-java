@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.Arrays;
 
-public class MergeIntervals {
+public class MergeIntervalsSortedScan {
     /**
      * Merge Intervals
      *
@@ -57,7 +57,7 @@ public class MergeIntervals {
             { 0, 2 }
         };
 
-        MergeIntervals mi = new  MergeIntervals(); 
+        MergeIntervalsSortedScan mi = new  MergeIntervalsSortedScan(); 
         int[][] mergedIntervals = mi.merge(intervals);
 
         for (int[] interval : intervals) {

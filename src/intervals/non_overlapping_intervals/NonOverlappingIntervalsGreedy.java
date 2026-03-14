@@ -20,7 +20,7 @@ import java.util.Arrays;
  * Time Complexity: O(nlogn), because of sorting.
  * Space Complexity: O(1), because we are not using any extra space. 
  */
-public class NonOverlappingIntervals {
+public class NonOverlappingIntervalsGreedy {
 
     public int eraseOverlappingIntervals(int[][] intervals) {
 		Arrays.sort(intervals, (a, b) -> a[1] - b[1]);
