@@ -13,7 +13,7 @@ import java.util.*;
  * Time Complexity: O(n): iterate through string once. 
  * Space Complexity: O(n): possible for character set to contain all the characters in the string because all are unique.
  */
-public class LongestSubstringV2 {
+public class LongestSubstringHashSet {
 
 	public int lengthOfLongestSubstring(String s) {
 		int left = 0; 
@@ -31,4 +31,3 @@ public class LongestSubstringV2 {
 		return len;
 	}
 }
-

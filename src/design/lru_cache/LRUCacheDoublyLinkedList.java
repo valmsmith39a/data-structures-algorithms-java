@@ -28,14 +28,14 @@ import java.util.Map;
  * 
  */
 
-public class LRUCache {
+public class LRUCacheDoublyLinkedList {
     private Map<String, DoublyLinkedListNode> cache;
     private int capacity;
     private int size;
     private DoublyLinkedListNode head;
     private DoublyLinkedListNode tail;
 
-    public LRUCache(int capacity) {
+    public LRUCacheDoublyLinkedList(int capacity) {
         cache = new HashMap<>();
         this.capacity = capacity;
         size = 0;
@@ -120,7 +120,7 @@ public class LRUCache {
     }
 
     public static void main(String[] args) {
-        LRUCache lruCache = new LRUCache(3);
+        LRUCacheDoublyLinkedList lruCache = new LRUCacheDoublyLinkedList(3);
         lruCache.put("a", 1);
         lruCache.put("b", 2);
         lruCache.put("c", 3);

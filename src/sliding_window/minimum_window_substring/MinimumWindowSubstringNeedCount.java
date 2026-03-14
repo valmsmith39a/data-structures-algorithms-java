@@ -9,7 +9,7 @@ import java.util.*;
  * 3. Move right pointer forward until find all the characters we need 
  * 4. Move left pointer forward to minimize the window until we lose a character that we need 
  */
-public class MinimumWindowSubstring2 {
+public class MinimumWindowSubstringNeedCount {
 
     public String minWindow (String s, String t) {
         if (s == null || t == null || s.length() < t.length()) {

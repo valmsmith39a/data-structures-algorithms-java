@@ -29,7 +29,7 @@ import java.util.*;
  * @param right   right pointer index
  * @return index of the target number or -1
  */
-public class BinarySearch {
+public class BinarySearchRecursive {
 
     public int binarySearch(int[] numbers, int target, int left, int right) {
         /**
@@ -62,7 +62,7 @@ public class BinarySearch {
 
     public static void main(String[] args) {
         int[] numbers = new int[] { 2, 5, 6, 9, 15, 19, 23 };
-        BinarySearch search = new BinarySearch();
+        BinarySearchRecursive search = new BinarySearchRecursive();
         int target = 19;
         int resultBinarySearch = search.binarySearch(numbers, target, 0, numbers.length - 1);
         // Target is: 19 Index of target is: 5

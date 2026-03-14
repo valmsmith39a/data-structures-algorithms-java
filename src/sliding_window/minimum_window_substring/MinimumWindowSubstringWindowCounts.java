@@ -15,7 +15,7 @@ import java.util.*;
  * Time Complextity: O(n), because interate through string once
  * Space Complexity: O(n), because of hash maps to store character and counts;
  */
-public class MinimumWindowSubstring {
+public class MinimumWindowSubstringWindowCounts {
 
 	public String minWindow(String s, String t) {
 		String res = "";
@@ -54,7 +54,7 @@ public class MinimumWindowSubstring {
 	public static void main(String[] args) {
 		String s = "ADOBECODEBANC";
 		String t = "ABC";
-		MinimumWindowSubstring mws = new MinimumWindowSubstring();
+		MinimumWindowSubstringWindowCounts mws = new MinimumWindowSubstringWindowCounts();
 		String substring = mws.minWindow(s, t);
 		// Expected: BANC
 		System.out.println(substring);

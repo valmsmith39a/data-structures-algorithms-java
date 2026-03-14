@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-class LongestSubstring {
+class LongestSubstringIndexMap {
     
     public int findLengthLongestSubstring(String s) {
         int n = s.length();
@@ -23,7 +23,7 @@ class LongestSubstring {
         String s = "abcabcbb";
         String s2 = "bbbbb";
         String s3 = "pwwkew";
-        LongestSubstring substring = new LongestSubstring();
+        LongestSubstringIndexMap substring = new LongestSubstringIndexMap();
         int length = substring.findLengthLongestSubstring(s);
         int length2 = substring.findLengthLongestSubstring(s2);
         int length3 = substring.findLengthLongestSubstring(s3);

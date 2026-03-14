@@ -9,7 +9,7 @@ import java.util.*;
  * Time Complexity: O(V + E)
  * Space Complexity: O(N)
  */
-public class CloneGraph {
+public class CloneGraphDFS {
 	// Map old node to the new, cloned node
 	Map<Node, Node> visited = new HashMap<>();
 
