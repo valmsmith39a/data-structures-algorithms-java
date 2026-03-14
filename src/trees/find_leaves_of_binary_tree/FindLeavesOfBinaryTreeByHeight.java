@@ -39,7 +39,7 @@ class BinaryTree {
 	}
 }
 
-public class BinaryTreeLeaves {
+public class FindLeavesOfBinaryTreeByHeight {
 	/**
 	 * Find Leaves of Binary tree
 	 *
@@ -93,7 +93,7 @@ public class BinaryTreeLeaves {
 		bt.root.left.right = new TreeNode(5);
 
 		// Solution: [[4, 5, 3], [2], [1]]
-		BinaryTreeLeaves btl = new BinaryTreeLeaves();
+		FindLeavesOfBinaryTreeByHeight btl = new FindLeavesOfBinaryTreeByHeight();
 		List<List<Integer>> leaves = btl.findLeaves(bt.root);
 		for (List<Integer> setOfLeaves : leaves) {
 			for (int leaf : setOfLeaves) {

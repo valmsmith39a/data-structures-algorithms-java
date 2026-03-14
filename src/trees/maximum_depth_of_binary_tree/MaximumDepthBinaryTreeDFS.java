@@ -15,10 +15,10 @@ import java.util.LinkedList;
  * Time Complexity: O(n)
  * Space Complexity: O(n)
  */
-public class MaxDepthBinaryTree {
+public class MaximumDepthBinaryTreeDFS {
 	Node root;
 
-	public MaxDepthBinaryTree(int[] numbers) {
+	public MaximumDepthBinaryTreeDFS(int[] numbers) {
 		root = buildBinaryTree(numbers);
 	}
 
@@ -60,10 +60,9 @@ public class MaxDepthBinaryTree {
 
 	public static void main(String[] args) {	
 		int[] numbers = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
-		MaxDepthBinaryTree bt = new MaxDepthBinaryTree(numbers);
+		MaximumDepthBinaryTreeDFS bt = new MaximumDepthBinaryTreeDFS(numbers);
 		int maxDepth = bt.getMaxDepth(bt.root);
 		System.out.println("Max depth of binary tree is: " + maxDepth);
 	}
 }
-
 

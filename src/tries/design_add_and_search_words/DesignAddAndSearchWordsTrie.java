@@ -8,7 +8,7 @@ import java.util.*;
  * Time Complexity: O(M) time: M = number of characters
  * Space Complexity: O(M) space
  */
-public class WordDictionary {
+public class DesignAddAndSearchWordsTrie {
 	TrieNode trie;
 
 	private class TrieNode {
@@ -19,7 +19,7 @@ public class WordDictionary {
 		}
 	}
 
-	public WordDictionary() {
+	public DesignAddAndSearchWordsTrie() {
 		trie = new TrieNode();
 	}
 

@@ -58,11 +58,11 @@ import java.util.*;
  * described tries in a computer context. In 1960, Edward Fredkin independently
  * described the idea and coined the term trie "tree" (based on "retrieval").
  */
-public class SuffixTrie {
+public class SuffixTrieContains {
     TrieNode root = new TrieNode();
     char endSymbol = '*';
 
-    public SuffixTrie(String str) {
+    public SuffixTrieContains(String str) {
         populateSuffixTrie(str);
     }
 
@@ -99,7 +99,7 @@ public class SuffixTrie {
 
     public static void main(String[] args) {
         String str1 = "babc";
-        SuffixTrie suffixTrie = new SuffixTrie(str1);
+        SuffixTrieContains suffixTrie = new SuffixTrieContains(str1);
         String test1 = "abc";
         String test2 = "bab";
         // true

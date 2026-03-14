@@ -16,10 +16,10 @@ import java.util.Map;
  * 1. insert: O(n)
  * 2. search: O(1), memory used does not scale with the size of the input 
  */
-public class Trie {
+public class ImplementTrieHashMap {
     private TrieNode root;
 
-    public Trie() {
+    public ImplementTrieHashMap() {
         root = new TrieNode();
     }
 
@@ -58,7 +58,7 @@ public class Trie {
     }
 
     public static void main(String[] args) {
-        Trie trie = new Trie();
+        ImplementTrieHashMap trie = new ImplementTrieHashMap();
         trie.insert("hello");
         System.out.println(trie.search("hello")); // true 
         System.out.println(trie.search("he"));    // false 

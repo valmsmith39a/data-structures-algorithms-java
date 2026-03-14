@@ -1,5 +1,5 @@
 
-public class InvertBinaryTree {
+public class InvertBinaryTreeDFS {
 
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
@@ -29,7 +29,7 @@ public class InvertBinaryTree {
         System.out.println(node1.left.data);
         System.out.println(node1.right.data);
 
-        InvertBinaryTree ibt = new InvertBinaryTree();
+        InvertBinaryTreeDFS ibt = new InvertBinaryTreeDFS();
         TreeNode root = ibt.invertTree(node1);
 
         // Expcect: 1, 3, 2 

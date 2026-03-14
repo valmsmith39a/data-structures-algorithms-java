@@ -18,7 +18,7 @@
  * 3. Complexity: O(n) time, O(h) space, where h is the height of the tree or
  * O(n) in the worst case of a skewed tree
  */
-public class HasPathSum {
+public class PathSumDFS {
 	public boolean hasPathSum(TreeNode root, int targetSum) {
 		return dfs(root, targetSum);
 	}

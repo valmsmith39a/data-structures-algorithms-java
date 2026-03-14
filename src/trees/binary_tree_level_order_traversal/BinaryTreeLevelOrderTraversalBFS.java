@@ -10,7 +10,7 @@ import java.util.LinkedList;
  *  Time Complexity: O(n)
  *  Space Complexity: O(n)
  */
-public class BinaryTreeLevelOrderTraversal {
+public class BinaryTreeLevelOrderTraversalBFS {
 
 	private static class TreeNode {
 		int val;
@@ -48,7 +48,7 @@ public class BinaryTreeLevelOrderTraversal {
 	}
 
 	public static void main(String[] args) {
-		BinaryTreeLevelOrderTraversal solution = new BinaryTreeLevelOrderTraversal();
+		BinaryTreeLevelOrderTraversalBFS solution = new BinaryTreeLevelOrderTraversalBFS();
 		TreeNode root = new TreeNode(3);
 		root.left = new TreeNode(9);
 		root.right = new TreeNode(20);
