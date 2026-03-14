@@ -30,7 +30,7 @@ import java.util.PriorityQueue;
  * (total number of nodes)
  * 
  */
-class MergeKSortedLists {
+class MergeKSortedListsMinHeap {
 	public ListNode mergeKLists(ListNode[] lists) {
 		if (lists == null || lists.length == 0) {
 			return null;

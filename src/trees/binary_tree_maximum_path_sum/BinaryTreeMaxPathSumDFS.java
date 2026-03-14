@@ -28,7 +28,7 @@ import java.util.*;
  * 				     i.e. all nodes have only one child.
  *  or O(log(n)) if the tree is balanced. 
  */
-public class BinaryTreeMaxPathSum2 {
+public class BinaryTreeMaxPathSumDFS {
 	private int maxSum = Integer.MIN_VALUE;		
 
 	public int maxPathSum(TreeNode root) {
@@ -55,7 +55,7 @@ public class BinaryTreeMaxPathSum2 {
 	}
 
 	public static void main(String[] args) {
-		BinaryTreeMaxPathSum2 solution = new BinaryTreeMaxPathSum2();
+		BinaryTreeMaxPathSumDFS solution = new BinaryTreeMaxPathSumDFS();
 		TreeNode root = new TreeNode(1);
 		root.left = new TreeNode(2);
 		root.right = new TreeNode(3);

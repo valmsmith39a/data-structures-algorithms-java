@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Dijkstra {
+public class DijkstraArrayScan {
 	/**
 	 * Dijkstra's Algorithm
 	 * 
@@ -185,7 +185,7 @@ public class Dijkstra {
 			index++;
 		}
 		int startingVertex = 0;
-		Dijkstra dijkstra = new Dijkstra();
+		DijkstraArrayScan dijkstra = new DijkstraArrayScan();
 		int[] minDistances = dijkstra.dijkstrasAlgorithm(startingVertex, adjacencyList);
 		// Solution: 0, 3, 2, 8
 		System.out.println("Dijkstra's Algorithm, min distances: ");

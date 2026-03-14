@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class MergeKSortedLists {
+public class MergeKSortedListsPairwise {
 
 	private class ListNode {
 		int val;
