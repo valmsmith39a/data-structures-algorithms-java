@@ -6,6 +6,20 @@ bin/
 target/
 out/
 
+# macOS
+.DS_Store
+
+# IDE metadata
+.metadata/
+.settings/
+.classpath
+.project
+
+# VS Code
+.vscode/
+src/.vscode/
+bin/.vscode/
+
 # Log file
 *.log
 
@@ -29,4 +43,3 @@ out/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-.metadata
