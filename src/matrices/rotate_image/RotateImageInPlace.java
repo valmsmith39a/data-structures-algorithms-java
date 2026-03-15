@@ -11,7 +11,7 @@ import java.util.*;
  * Space complexity: O(1) space
  *
  */
-public class RotateImage {
+public class RotateImageInPlace {
     
     public void rotate(int[][] matrix) {
         int l = 0;
@@ -31,4 +31,3 @@ public class RotateImage {
         }
     }
 }
-

@@ -20,7 +20,7 @@ import java.util.*;
  * 
  * @param args
  */
-public class Permutations {
+public class PermutationsSwapBacktracking {
 
 	public List<List<Integer>> getPermutations(List<Integer> array) {
 		List<List<Integer>> permutations = new ArrayList<List<Integer>>();
@@ -62,7 +62,7 @@ public class Permutations {
 	}
 
 	public static void main(String[] args) {
-		Permutations perm = new Permutations();
+		PermutationsSwapBacktracking perm = new PermutationsSwapBacktracking();
 		List<Integer> numberSet = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
 		List<List<Integer>> permutations = perm.getPermutations(numberSet);
 

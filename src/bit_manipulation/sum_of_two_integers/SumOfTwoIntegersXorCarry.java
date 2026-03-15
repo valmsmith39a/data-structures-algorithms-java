@@ -25,7 +25,7 @@ import java.util.*;
  *   a = 0110 = 6
  *
  */
-public class SumOfTwoIntegersBitwiseOp {
+public class SumOfTwoIntegersXorCarry {
     /**
      * XOR the 2 integers, save the result 
      * AND the 2 integers (original, before change), shift bits to the left, save the result
@@ -45,7 +45,7 @@ public class SumOfTwoIntegersBitwiseOp {
         int c = 9; 
         int d = 11;
 
-        SumOfTwoIntegersBitwiseOp op = new SumOfTwoIntegersBitwiseOp();
+        SumOfTwoIntegersXorCarry op = new SumOfTwoIntegersXorCarry();
         System.out.println("1 + 2 = " + op.getSumIterative(a, b));
         System.out.println("9 + 11 = " + op.getSumIterative(c, d));
     }

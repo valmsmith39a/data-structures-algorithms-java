@@ -16,7 +16,7 @@ import java.util.*;
  * Time Complexity: O(mn) time
  * Space Complexity: O(1) space
  */
-public class SetMatrixZeroes {
+public class SetMatrixZeroesMarkers {
 	
 	public void setZeroes(int[][] matrix) {
 		int rows = matrix.length;
@@ -54,4 +54,3 @@ public class SetMatrixZeroes {
 		}
 	}
 }
-

@@ -7,7 +7,7 @@ import java.util.List;
  * each permutation takes O(N) time
  * Space Complexity: O(N) because of the recursion stack and the 'used' array
  */
-public class Permutations4 {
+public class PermutationsUsedArrayBacktracking {
 
 	public List<List<Integer>> permute(int[] nums) {
 		List<List<Integer>> res = new ArrayList<>();

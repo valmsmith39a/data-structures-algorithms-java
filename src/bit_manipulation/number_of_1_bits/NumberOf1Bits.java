@@ -14,7 +14,7 @@
  * Time Complexity: O(1) - 32 iterations, because the input is a 32-bit integer
  * Space Complexity: O(1) - no extra space used 
  */
-public class NumberOfOneBits {
+public class NumberOf1Bits {
 
 	public int hammingWeight(int n) {
 		int count = 0;
@@ -26,7 +26,7 @@ public class NumberOfOneBits {
 	}
 
 	public static void main(String[] args) {
-		NumberOfOneBits obj = new NumberOfOneBits();
+		NumberOf1Bits obj = new NumberOf1Bits();
 		// Expected output: 2
 		System.out.println(obj.hammingWeight(3));
 	}

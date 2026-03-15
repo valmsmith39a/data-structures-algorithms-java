@@ -8,7 +8,7 @@ import java.util.*;
  * Insight: 
  * Shift bits of each number to the right until find the bit (1 or 0) that is common to all the numbers in the range.
  */ 
-public class BitwiseAndNumberRange {
+public class BitwiseAndOfNumbersRangeShift {
 
     public int rangeBitwiseAnd(int m, int n) {
         int shift = 0;
@@ -25,7 +25,7 @@ public class BitwiseAndNumberRange {
     }
 
     public static void main(String[] args) {
-        BitwiseAndNumberRange bitwiseAnd = new BitwiseAndNumberRange();
+        BitwiseAndOfNumbersRangeShift bitwiseAnd = new BitwiseAndOfNumbersRangeShift();
         // Expected: 4
         System.out.println(bitwiseAnd.rangeBitwiseAnd(5, 7));
         // Expected: 8

@@ -1,4 +1,4 @@
-class GameOfLife {
+class GameOfLifeInPlace {
     /**
      * Problem Name: Game of Life
      * 
@@ -113,7 +113,7 @@ class GameOfLife {
                 { 0, 0, 0 },
                 { 0, 0, 0 }
         };
-        GameOfLife life = new GameOfLife();
+        GameOfLifeInPlace life = new GameOfLifeInPlace();
         System.out.println("Current board state: ");
         life.printBoard(board);
         life.updateBoard(board);
@@ -128,4 +128,3 @@ class GameOfLife {
         life.printBoard(board);
     }
 }
-

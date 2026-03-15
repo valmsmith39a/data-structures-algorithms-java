@@ -11,7 +11,7 @@ import java.util.*;
  * Space Complexity: O(1), excluding the result list
  */
 
-public class SpiralMatrix {
+public class SpiralMatrixTraversal {
    
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> res = new ArrayList<Integer>();
@@ -40,7 +40,7 @@ public class SpiralMatrix {
     } 
 
     public static void main(String[] args) {
-        SpiralMatrix sm = new SpiralMatrix();
+        SpiralMatrixTraversal sm = new SpiralMatrixTraversal();
         int[][] matrix = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
         // Expected: [1,2,3,6,9,8,7,4,5]
         System.out.println(sm.spiralOrder(matrix));
